@@ -52,7 +52,103 @@ This guide covers the installation and configuration of pfSense firewall for the
 4. Check **Connect at power on**
 5. Power on VM
 
-### Installation Process
+### Installation Process (GUI Installer)
+
+The newer pfSense installer uses a graphical interface. Follow these steps:
+
+#### Connectivity Check
+
+1. Installer will attempt to verify internet connection
+2. **Note:** On host-only networks, this will timeout (expected)
+3. Wait 2-3 minutes for timeout, or press Enter/Esc to skip
+4. If it asks to check network settings, you can continue anyway
+
+#### Subscription Validation
+
+1. Dialog appears: "Active Subscription Validation"
+2. Select **[ Install CE ]** (pfSense Community Edition - free)
+3. Click **OK**
+
+#### Installation Options
+
+1. **File System:** Select **ZFS (recommended default)**
+2. **Partition Scheme:** Select **GPT (compatible with MBR)**
+3. Select **Continue** and click **OK**
+
+#### ZFS Virtual Device Type
+
+1. Select **Stripe - No Redundancy**
+   - This is fine for lab VMs (single disk, no redundancy needed)
+2. Click **OK**
+
+#### Disk Selection
+
+1. Select **da0** (your VMware virtual disk, typically 8GB)
+2. Click **OK**
+
+#### Confirmation
+
+1. Warning appears: "Are you sure you want to destroy the current contents?"
+2. Click **[ Yes ]** to proceed
+3. Installation will begin (may take several minutes)
+
+#### Software Version Selection
+
+1. Select **"000-2_8_1 Current Stable Version (2.8.1)"** (or latest available)
+2. Click **OK**
+3. Wait for installation to complete
+
+### Initial Interface Configuration (GUI Installer)
+
+After installation, the installer will configure network interfaces:
+
+#### Interface Assignment
+
+1. Dialog: "Interface Assignment and Configuration"
+2. Installer may auto-detect interfaces
+3. **Important:** Verify assignments are correct:
+   - **WAN:** Should be `em0`
+   - **LAN:** Should be `em1`
+   - **OPT1:** Should be `em2` (may show as "WAN" - this is a bug)
+4. If assignments are wrong, click **[Assign/Configure]** to fix
+5. Otherwise, click **[ Continue ]**
+
+#### WAN Interface (em0) Configuration
+
+1. Dialog: "WAN (em0) Network Mode Setup"
+2. Settings:
+   - **Interface Mode:** DHCP (client) ✓
+   - **VLAN Settings:** VLAN Tagging disabled ✓
+   - **Use local resolver:** false ✓
+3. Select **Continue** and click **OK**
+
+#### LAN Interface (em1) Configuration
+
+1. Dialog: "LAN (em1) Network Mode Setup"
+2. **Important:** Change these settings:
+   - Press `I` (IP Address) → Enter: `192.168.100.1/24`
+   - Press `D` (DHCPD Enabled) → Set to `false` (we'll use AD DHCP)
+   - **Interface Mode:** STATIC ✓
+   - **VLAN Settings:** VLAN Tagging disabled ✓
+3. Select **Continue** and click **OK**
+
+#### OPT1 Interface (em2) Configuration - DMZ
+
+1. Dialog: "WAN (em2) Network Mode Setup" (installer may mislabel it as WAN)
+2. **Important:** Configure for DMZ:
+   - Press `I` (IP Address) → Enter: `192.168.101.1/24`
+   - Press `G` (Default Gateway) → Leave **blank** (will show warning - this is OK)
+   - Press `D` (DNS Server) → Enter: `192.168.100.10` (Domain Controller)
+   - **Interface Mode:** STATIC ✓
+   - **VLAN Settings:** VLAN Tagging disabled ✓
+3. Click **OK** on gateway warning (OPT1 doesn't need a gateway)
+4. Select **Continue** and click **OK**
+
+**Note:** If you encounter issues with OPT1 configuration, you can skip it and configure via web interface later.
+
+### Alternative: Text-Based Installer
+
+If you're using an older pfSense version with text-based installer:
 
 1. Boot menu appears - select **Install**
 2. Accept license agreement
@@ -64,18 +160,11 @@ This guide covers the installation and configuration of pfSense firewall for the
 8. Wait for installation to complete
 9. Reboot when prompted
 
-### Initial Configuration
-
-After reboot, pfSense will start the setup wizard:
-
+After reboot, text-based setup wizard:
 1. **Should VLANs be set up?** - **n** (No)
-2. **Enter WAN interface name:** 
-   - Type: `em0` (or check what interfaces are available)
-   - Common: `em0`, `vtnet0`, or `hn0`
-3. **Enter LAN interface name:**
-   - Type: `em1` (next interface)
-4. **Enter OPT1 interface name:**
-   - Type: `em2` (third interface)
+2. **Enter WAN interface name:** `em0`
+3. **Enter LAN interface name:** `em1`
+4. **Enter OPT1 interface name:** `em2`
 5. Configuration complete
 
 **Note:** Interface names vary. Use `ifconfig` to see available interfaces if unsure.
@@ -362,6 +451,39 @@ If not using AD DHCP, configure pfSense DHCP:
 - Check protocol and port settings
 - Review firewall logs
 - Ensure "Apply" was clicked after changes
+
+### Connectivity Check Timeout
+
+**Problem:** Installer hangs on "Trying to reach the Netgate Servers"
+
+**Solutions:**
+- This is normal on host-only networks (no internet access)
+- Wait 2-3 minutes for timeout
+- Press Enter or Esc to skip
+- Installer will continue despite connectivity failure
+- You can also temporarily switch VM network adapter to NAT during installation
+
+### Gateway Warning for OPT1
+
+**Problem:** "Cannot set WAN interface Default Gateway" warning for OPT1 (em2)
+
+**Solutions:**
+- This is expected - OPT1/DMZ doesn't need a default gateway
+- Click OK on the warning
+- Leave Default Gateway blank for OPT1
+- Configure OPT1 properly via web interface after installation if needed
+
+### Interface Assignment Issues
+
+**Problem:** Installer assigns wrong interfaces (e.g., em2 as WAN instead of OPT1)
+
+**Solutions:**
+- Click **[Assign/Configure]** during installation to manually assign
+- Or complete installation and fix via web interface: **Interfaces > Assignments**
+- Reassign interfaces correctly:
+  - em0 → WAN
+  - em1 → LAN
+  - em2 → OPT1
 
 ## Next Steps
 
