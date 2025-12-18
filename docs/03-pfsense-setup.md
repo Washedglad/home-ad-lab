@@ -414,10 +414,21 @@ If not using AD DHCP, configure pfSense DHCP:
 1. Go to **Status > System Logs > Settings**
 2. Scroll to **Remote Logging Options**
 3. Configure:
-   - **Enable Remote Logging:** ✅ Checked
-   - **Remote Syslog Server:** 192.168.100.20 (Wazuh)
-   - **Remote Syslog Contents:** Select what to log
+   - **Enable Remote Logging:** ✅ Checked (check "Send log messages to remote syslog server")
+   - **Source Address:** LAN (or leave default)
+   - **IP Protocol:** IPv4
+   - **Remote log servers:** `192.168.100.20:514` (Wazuh IP and port)
+     - **Port:** 514 (UDP) - This is the standard syslog port
+   - **Remote Syslog Contents:** Select what to log:
+     - ✅ Everything (or select specific categories)
+     - ✅ Firewall Events (recommended)
+     - ✅ System Events (recommended)
 4. Save
+
+**Important:** 
+- **Port 514** is the standard syslog port (UDP)
+- Wazuh listens on port 514/UDP for syslog messages
+- Format: `192.168.100.20:514` or just `192.168.100.20` (514 is default)
 
 **Note:** Configure this after Wazuh is set up.
 
