@@ -106,19 +106,19 @@ Test-Connection -ComputerName 192.168.100.1
 Test-Connection -ComputerName 192.168.100.10
 
 # Test domain resolution
-Resolve-DnsName -Name DC01.corp.local
+Resolve-DnsName -Name DC01.goldshire.local
 ```
 
 ## Step 4: Join Domain
 
-### Join to corp.local Domain
+### Join to goldshire.local Domain
 
 1. Open **Settings > Accounts > Access work or school**
 2. Click **Connect**
 3. Click **Join this device to a local Active Directory domain**
-4. Enter domain: `corp.local`
+4. Enter domain: `goldshire.local`
 5. Enter domain administrator credentials:
-   - **Username:** CORP\Administrator
+   - **Username:** GOLDSHIRE\Administrator
    - **Password:** (DC admin password)
 6. Click **OK**
 7. Restart when prompted
@@ -129,15 +129,15 @@ Resolve-DnsName -Name DC01.corp.local
 2. Click **Change settings**
 3. Click **Change**
 4. Select **Domain**
-5. Enter: `corp.local`
+5. Enter: `goldshire.local`
 6. Enter credentials
 7. Restart
 
 ### Verify Domain Join
 
-1. After restart, log in as `CORP\Administrator` or domain user
+1. After restart, log in as `GOLDSHIRE\Administrator` or domain user
 2. Open **Settings > Accounts**
-3. Verify domain shows as `corp.local`
+3. Verify domain shows as `goldshire.local`
 4. Verify computer appears in AD:
    - On DC, open **AD Users and Computers**
    - Navigate to **Computers** container
@@ -230,9 +230,9 @@ gpresult /r
 
 2. Test DNS resolution:
 ```powershell
-Resolve-DnsName -Name WEB01.corp.local
-Resolve-DnsName -Name DC01.corp.local
-Resolve-DnsName -Name wazuh.corp.local
+Resolve-DnsName -Name WEB01.goldshire.local
+Resolve-DnsName -Name DC01.goldshire.local
+Resolve-DnsName -Name wazuh.goldshire.local
 ```
 
 ### Test File Sharing (if configured)

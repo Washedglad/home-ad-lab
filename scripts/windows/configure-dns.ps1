@@ -5,7 +5,7 @@
 
 param(
     [string[]]$Forwarders = @("8.8.8.8", "1.1.1.1"),
-    [string]$DomainName = "corp.local"
+    [string]$DomainName = "goldshire.local"
 )
 
 Write-Host "Configuring DNS..." -ForegroundColor Green

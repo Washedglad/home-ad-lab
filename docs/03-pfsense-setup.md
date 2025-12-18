@@ -402,7 +402,7 @@ If not using AD DHCP, configure pfSense DHCP:
    - **Range:** 192.168.100.100 - 192.168.100.199
    - **Default Gateway:** 192.168.100.1
    - **DNS Servers:** 192.168.100.10 (once DC is configured)
-   - **Domain Name:** corp.local
+   - **Domain Name:** goldshire.local
 4. Save
 
 **Note:** We'll use AD DHCP, so this is optional.
@@ -454,9 +454,9 @@ If not using AD DHCP, configure pfSense DHCP:
 **Important - Domain Name Warning:**
 - pfSense warns against using `.local` as the TLD (conflicts with mDNS)
 - **For pfSense router domain:** Use `home.arpa`, `corp.lab`, or `local.lan`
-- **For Active Directory domain:** You can still use `corp.local` (it's fine for lab environments)
+- **For Active Directory domain:** You can still use `goldshire.local` (it's fine for lab environments)
 - The pfSense domain is separate from your AD domain
-- In this lab: pfSense uses `home.arpa`, AD uses `corp.local`
+- In this lab: pfSense uses `home.arpa`, AD uses `goldshire.local`
 
 ### Web Interface Settings
 

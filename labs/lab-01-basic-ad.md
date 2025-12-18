@@ -18,12 +18,12 @@ Learn fundamental Active Directory administration tasks including user managemen
 
 **Steps:**
 
-1. Log in to DC01 as `CORP\Administrator`
+1. Log in to DC01 as `GOLDSHIRE\Administrator`
 2. Open **Active Directory Users and Computers**
 3. Create the following OU structure:
 
 ```
-corp.local
+goldshire.local
 ├── Computers
 │   ├── Servers
 │   └── Workstations
@@ -105,11 +105,11 @@ corp.local
 
 1. Log in to CLIENT01
 2. Log out current user
-3. Log in as `CORP\sales1`
+3. Log in as `GOLDSHIRE\sales1`
 4. Verify authentication succeeds
 5. Verify user profile is created
 6. Log out
-7. Repeat with `CORP\itadmin`
+7. Repeat with `GOLDSHIRE\itadmin`
 
 **Expected Result:** Users can successfully authenticate.
 

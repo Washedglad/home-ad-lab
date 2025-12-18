@@ -49,9 +49,9 @@
 | IP Address | Hostname | Role | Description |
 |------------|----------|------|-------------|
 | 192.168.100.1 | pfsense | Gateway | pfSense firewall/router |
-| 192.168.100.10 | DC01.corp.local | Domain Controller | AD DS, DNS, DHCP |
-| 192.168.100.20 | wazuh.corp.local | SIEM | Wazuh manager and dashboard |
-| 192.168.100.50 | CLIENT01.corp.local | Workstation | Windows client for testing |
+| 192.168.100.10 | DC01.goldshire.local | Domain Controller | AD DS, DNS, DHCP |
+| 192.168.100.20 | wazuh.goldshire.local | SIEM | Wazuh manager and dashboard |
+| 192.168.100.50 | CLIENT01.goldshire.local | Workstation | Windows client for testing |
 | 192.168.100.100-199 | - | DHCP Pool | Reserved for DHCP clients |
 | 192.168.100.200-254 | - | Reserved | Future expansion |
 
@@ -60,7 +60,7 @@
 | IP Address | Hostname | Role | Description |
 |------------|----------|------|-------------|
 | 192.168.101.1 | - | Gateway | pfSense OPT1 interface |
-| 192.168.101.10 | WEB01.corp.local | Web Server | IIS web server |
+| 192.168.101.10 | WEB01.goldshire.local | Web Server | IIS web server |
 | 192.168.101.100-254 | - | Reserved | Future expansion |
 
 ## Subnet Masks
@@ -90,7 +90,7 @@
 - **Range:** 192.168.100.100 - 192.168.100.199
 - **Default Gateway:** 192.168.100.1
 - **DNS Servers:** 192.168.100.10, 192.168.100.1
-- **Domain Name:** corp.local
+- **Domain Name:** goldshire.local
 - **Lease Duration:** 8 days
 
 ### Reserved Addresses
@@ -178,14 +178,14 @@ If using VLANs in a more advanced setup:
 ## Network Services
 
 ### DNS Zones
-- **corp.local** - Primary forward lookup zone
+- **goldshire.local** - Primary forward lookup zone
 - **100.168.192.in-addr.arpa** - Reverse lookup zone for internal network
 - **101.168.192.in-addr.arpa** - Reverse lookup zone for DMZ network
 
 ### DHCP Options
 - **Option 003** - Router (192.168.100.1)
 - **Option 006** - DNS Servers (192.168.100.10, 192.168.100.1)
-- **Option 015** - Domain Name (corp.local)
+- **Option 015** - Domain Name (goldshire.local)
 - **Option 044** - WINS Servers (if configured)
 
 ## Network Monitoring
@@ -209,10 +209,10 @@ Use these commands to verify network connectivity:
 Test-Connection -ComputerName 192.168.100.1
 
 # Test DNS resolution
-Resolve-DnsName -Name DC01.corp.local
+Resolve-DnsName -Name DC01.goldshire.local
 
 # Test domain controller connectivity
-Test-Connection -ComputerName DC01.corp.local
+Test-Connection -ComputerName DC01.goldshire.local
 
 # Test Wazuh connectivity
 Test-NetConnection -ComputerName 192.168.100.20 -Port 5601
@@ -225,7 +225,7 @@ ping -c 4 192.168.100.10
 ping -c 4 192.168.100.20
 
 # Test DNS resolution
-nslookup DC01.corp.local 192.168.100.10
+nslookup DC01.goldshire.local 192.168.100.10
 
 # Test port connectivity
 nc -zv 192.168.100.20 5601

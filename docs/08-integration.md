@@ -82,30 +82,30 @@ Test-Connection -ComputerName 192.168.101.10
 
 **From Domain Controller:**
 ```powershell
-Resolve-DnsName -Name DC01.corp.local
-Resolve-DnsName -Name wazuh.corp.local
-Resolve-DnsName -Name WEB01.corp.local
-Resolve-DnsName -Name CLIENT01.corp.local
+Resolve-DnsName -Name DC01.goldshire.local
+Resolve-DnsName -Name wazuh.goldshire.local
+Resolve-DnsName -Name WEB01.goldshire.local
+Resolve-DnsName -Name CLIENT01.goldshire.local
 ```
 
 **From Wazuh Server:**
 ```bash
-nslookup DC01.corp.local 192.168.100.10
-nslookup WEB01.corp.local 192.168.100.10
-nslookup CLIENT01.corp.local 192.168.100.10
+nslookup DC01.goldshire.local 192.168.100.10
+nslookup WEB01.goldshire.local 192.168.100.10
+nslookup CLIENT01.goldshire.local 192.168.100.10
 ```
 
 **From Web Server:**
 ```powershell
-Resolve-DnsName -Name DC01.corp.local
-Resolve-DnsName -Name wazuh.corp.local
+Resolve-DnsName -Name DC01.goldshire.local
+Resolve-DnsName -Name wazuh.goldshire.local
 ```
 
 **From Client:**
 ```powershell
-Resolve-DnsName -Name DC01.corp.local
-Resolve-DnsName -Name WEB01.corp.local
-Resolve-DnsName -Name wazuh.corp.local
+Resolve-DnsName -Name DC01.goldshire.local
+Resolve-DnsName -Name WEB01.goldshire.local
+Resolve-DnsName -Name wazuh.goldshire.local
 ```
 
 ### Verify Reverse DNS

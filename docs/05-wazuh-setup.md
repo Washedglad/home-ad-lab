@@ -129,7 +129,7 @@ sudo nano /etc/hosts
 
 3. Add line:
 ```
-192.168.100.20 wazuh wazuh.corp.local
+192.168.100.20 wazuh wazuh.goldshire.local
 ```
 
 ## Step 4: Install Wazuh Manager
@@ -338,7 +338,7 @@ sudo nano /var/ossec/etc/ossec.conf
   <email_notification>yes</email_notification>
   <email_to>your-email@example.com</email_to>
   <smtp_server>smtp.example.com</smtp_server>
-  <email_from>wazuh@corp.local</email_from>
+  <email_from>wazuh@goldshire.local</email_from>
 </global>
 ```
 

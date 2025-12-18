@@ -6,8 +6,8 @@ This document provides information about the fictional company used in this lab 
 
 **Company Name:** Goldshire Consulting  
 **Industry:** IT Consulting and Cybersecurity Services  
-**Domain:** corp.local  
-**Website:** www.goldshire-consulting.corp.local (internal)
+**Domain:** goldshire.local  
+**Website:** www.goldshire-consulting.goldshire.local (internal)
 
 ## Company Background
 
@@ -16,7 +16,7 @@ Goldshire Consulting is a fictional IT consulting company created for this Home 
 ## Lab Environment Details
 
 ### Network Information
-- **Domain:** corp.local
+- **Domain:** goldshire.local
 - **Internal Network:** 192.168.100.0/24
 - **DMZ Network:** 192.168.101.0/24
 - **Company Website:** Hosted on WEB01 (192.168.101.10)

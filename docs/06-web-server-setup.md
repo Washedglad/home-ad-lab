@@ -97,24 +97,24 @@ This guide covers the installation and configuration of IIS web server on Window
 
 ## Step 4: Join Domain
 
-### Join to corp.local Domain
+### Join to goldshire.local Domain
 
 1. After restart, in **Server Manager > Local Server**
 2. Click **Workgroup** link
 3. Click **Change**
 4. Select **Domain**
-5. Enter: `corp.local`
+5. Enter: `goldshire.local`
 6. Enter domain administrator credentials:
-   - **Username:** CORP\Administrator
+   - **Username:** GOLDSHIRE\Administrator
    - **Password:** (DC admin password)
 7. Click **OK**
 8. Restart when prompted
 
 ### Verify Domain Join
 
-1. After restart, log in as `CORP\Administrator`
+1. After restart, log in as `GOLDSHIRE\Administrator`
 2. Open **Server Manager**
-3. Verify domain shows as `corp.local`
+3. Verify domain shows as `goldshire.local`
 4. Verify computer appears in AD:
    - On DC, open **AD Users and Computers**
    - Navigate to **Computers** container
@@ -204,9 +204,9 @@ This guide covers the installation and configuration of IIS web server on Window
         <h1>Welcome to Goldshire Consulting</h1>
         <p>Internal Employee Portal</p>
         <div class="info">
-            <p><strong>Server:</strong> WEB01.corp.local</p>
+            <p><strong>Server:</strong> WEB01.goldshire.local</p>
             <p><strong>IP:</strong> 192.168.101.10</p>
-            <p><strong>Domain:</strong> corp.local</p>
+            <p><strong>Domain:</strong> goldshire.local</p>
         </div>
     </div>
 </body>
@@ -347,7 +347,7 @@ sudo systemctl restart wazuh-manager
 
 1. From any domain-joined machine:
 ```powershell
-Resolve-DnsName -Name WEB01.corp.local
+Resolve-DnsName -Name WEB01.goldshire.local
 ```
 
 2. Should resolve to 192.168.101.10
@@ -423,7 +423,7 @@ Resolve-DnsName -Name WEB01.corp.local
 
 ### DNS Resolution Fails
 
-**Problem:** Cannot resolve WEB01.corp.local
+**Problem:** Cannot resolve WEB01.goldshire.local
 
 **Solutions:**
 - Verify DNS record exists on DC

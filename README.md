@@ -22,7 +22,7 @@ The lab consists of the following components:
 - **Web Server** (192.168.101.10) - Windows Server 2019 with IIS in DMZ
 - **Client Workstation** (192.168.100.50) - Windows 10/11 for testing
 
-**Domain:** `corp.local`  
+**Domain:** `goldshire.local`  
 **Company:** Goldshire Consulting (fictional company for lab purposes)
 
 ## 📋 Quick Start

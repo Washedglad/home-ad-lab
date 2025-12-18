@@ -5,7 +5,7 @@
 
 param(
     [Parameter(Mandatory=$true)]
-    [string]$DomainName = "corp.local",
+    [string]$DomainName = "goldshire.local",
     
     [Parameter(Mandatory=$true)]
     [string]$SafeModePassword,

@@ -20,7 +20,7 @@ graph TB
         end
         
         subgraph "Internal Network 192.168.100.0/24"
-            DC[Domain Controller<br/>Windows Server 2019<br/>192.168.100.10<br/>DC01.corp.local<br/>AD DS, DNS, DHCP]
+            DC[Domain Controller<br/>Windows Server 2019<br/>192.168.100.10<br/>DC01.goldshire.local<br/>AD DS, DNS, DHCP]
             Wazuh[Wazuh SIEM<br/>Ubuntu 22.04 LTS<br/>192.168.100.20<br/>Manager + Dashboard]
             Client[Client Workstation<br/>Windows 10/11<br/>192.168.100.50<br/>Domain Member]
         end
@@ -68,11 +68,11 @@ graph TB
 
 **Role:** Active Directory Domain Services, DNS, DHCP
 
-**FQDN:** `DC01.corp.local`
+**FQDN:** `DC01.goldshire.local`
 
 **Functions:**
 - Active Directory Domain Services (AD DS)
-- DNS server for corp.local
+- DNS server for goldshire.local
 - DHCP server for internal network
 - Group Policy management
 - User and computer account management
@@ -86,7 +86,7 @@ graph TB
 
 **OU Structure:**
 ```
-corp.local
+goldshire.local
 ├── Computers
 │   ├── Servers
 │   └── Workstations
@@ -127,7 +127,7 @@ corp.local
 
 **Role:** Web application hosting in DMZ
 
-**FQDN:** `WEB01.corp.local`
+**FQDN:** `WEB01.goldshire.local`
 
 **Functions:**
 - IIS web server
@@ -151,7 +151,7 @@ corp.local
 
 **Role:** End-user workstation for testing
 
-**FQDN:** `CLIENT01.corp.local`
+**FQDN:** `CLIENT01.goldshire.local`
 
 **Functions:**
 - Domain member
@@ -232,7 +232,7 @@ graph LR
 
 ### Domain Name
 
-**Decision:** Use `corp.local` as domain name
+**Decision:** Use `goldshire.local` as domain name
 
 **Rationale:**
 - `.local` is reserved for mDNS but commonly used in labs

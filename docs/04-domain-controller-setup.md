@@ -124,7 +124,7 @@ This guide covers the installation and configuration of Active Directory Domain 
 2. Click **Promote this server to a domain controller**
 3. **Deployment Configuration:**
    - **Deployment Operation:** Add a new forest
-   - **Root domain name:** `corp.local`
+   - **Root domain name:** `goldshire.local`
 4. Click **Next**
 5. **Domain Controller Options:**
    - **Forest functional level:** Windows Server 2016 or 2019
@@ -135,7 +135,7 @@ This guide covers the installation and configuration of Active Directory Domain 
    - **DSRM Password:** Set strong password
 6. Click **Next**
 7. **DNS Options:** Warning about delegation - Click **Next** (OK for lab)
-8. **Additional Options:** NetBIOS name: `CORP` (default) > **Next**
+8. **Additional Options:** NetBIOS name: `GOLDSHIRE` (default) > **Next**
 9. **Paths:** Accept defaults or customize > **Next**
 10. **Review Options:** Review configuration > **Next**
 11. **Prerequisites Check:** Should pass > Click **Install**
@@ -143,25 +143,25 @@ This guide covers the installation and configuration of Active Directory Domain 
 
 ### Verify Domain Controller
 
-1. After restart, log in as `CORP\Administrator`
+1. After restart, log in as `GOLDSHIRE\Administrator`
 2. Open **Server Manager**
 3. Verify **AD DS** role is installed
 4. Open **Active Directory Users and Computers**
-5. Verify domain `corp.local` is visible
+5. Verify domain `goldshire.local` is visible
 
 ## Step 5: Configure DNS
 
 ### Verify DNS Installation
 
 1. Open **Server Manager > Tools > DNS**
-2. Verify `DC01.corp.local` is listed
-3. Verify forward lookup zone `corp.local` exists
+2. Verify `DC01.goldshire.local` is listed
+3. Verify forward lookup zone `goldshire.local` exists
 4. Verify reverse lookup zone exists
 
 ### Create DNS Records
 
-1. In **DNS Manager**, expand **DC01 > Forward Lookup Zones > corp.local**
-2. Right-click **corp.local > New Host (A or AAAA)**
+1. In **DNS Manager**, expand **DC01 > Forward Lookup Zones > goldshire.local**
+2. Right-click **goldshire.local > New Host (A or AAAA)**
 3. Create records:
    - **wazuh:** 192.168.100.20
    - **CLIENT01:** 192.168.100.50
@@ -204,7 +204,7 @@ This guide covers the installation and configuration of Active Directory Domain 
 ### Configure DHCP
 
 1. Open **Server Manager > Tools > DHCP**
-2. Right-click **DC01.corp.local > Authorize** (if needed)
+2. Right-click **DC01.goldshire.local > Authorize** (if needed)
 3. Expand **DC01 > IPv4**
 4. Right-click **IPv4 > New Scope**
 5. **Scope Wizard:**
@@ -215,7 +215,7 @@ This guide covers the installation and configuration of Active Directory Domain 
    - **Exclusions:** None (or exclude specific IPs)
    - **Lease Duration:** 8 days
    - **Router (Default Gateway):** 192.168.100.1
-   - **Domain Name:** corp.local
+   - **Domain Name:** goldshire.local
    - **DNS Servers:** 192.168.100.10
    - **WINS Servers:** None
    - **Activate scope:** Yes
@@ -235,7 +235,7 @@ This guide covers the installation and configuration of Active Directory Domain 
 ### Create OU Structure
 
 1. Open **Active Directory Users and Computers**
-2. Right-click **corp.local > New > Organizational Unit**
+2. Right-click **goldshire.local > New > Organizational Unit**
 3. Create OUs:
    - **Computers**
      - **Servers**
@@ -287,7 +287,7 @@ This guide covers the installation and configuration of Active Directory Domain 
 ### Create GPO
 
 1. Open **Group Policy Management**
-2. Right-click **corp.local > Create a GPO in this domain, and Link it here**
+2. Right-click **goldshire.local > Create a GPO in this domain, and Link it here**
 3. Name: `Default Domain Policy - Lab`
 4. Right-click GPO > **Edit**
 
@@ -328,7 +328,7 @@ w32tm /query /status
 
 ```powershell
 # Test forward lookup
-Resolve-DnsName -Name DC01.corp.local
+Resolve-DnsName -Name DC01.goldshire.local
 
 # Test reverse lookup
 Resolve-DnsName -Name 192.168.100.10 -Type PTR

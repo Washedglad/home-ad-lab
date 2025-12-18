@@ -19,9 +19,9 @@ Learn to create and manage Group Policy Objects (GPOs) to enforce security setti
 
 **Steps:**
 
-1. Log in to DC01 as `CORP\Administrator`
+1. Log in to DC01 as `GOLDSHIRE\Administrator`
 2. Open **Group Policy Management**
-3. Right-click **corp.local > Create a GPO in this domain, and Link it here**
+3. Right-click **goldshire.local > Create a GPO in this domain, and Link it here**
 4. Name: `Lab Security Policy`
 5. Click **OK**
 

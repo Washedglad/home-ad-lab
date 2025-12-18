@@ -79,7 +79,7 @@ This guide addresses common problems encountered during Home AD Lab setup and op
 **Solutions:**
 
 1. **Check DNS Resolution:**
-   - Verify DNS points to DC: `nslookup DC01.corp.local`
+   - Verify DNS points to DC: `nslookup DC01.goldshire.local`
    - Check DNS service is running on DC
    - Verify forward lookup zone exists
 
@@ -95,7 +95,7 @@ This guide addresses common problems encountered during Home AD Lab setup and op
 
 4. **Check Credentials:**
    - Verify domain administrator credentials
-   - Use FQDN format: `CORP\Administrator`
+   - Use FQDN format: `GOLDSHIRE\Administrator`
    - Check account is not locked
 
 5. **Check Domain Controller:**

@@ -86,29 +86,29 @@ Before starting verification:
 
 **Test from each machine:**
 
-- [ ] **DC01.corp.local**
+- [ ] **DC01.goldshire.local**
   - [ ] Resolves to 192.168.100.10
-  - [ ] `Resolve-DnsName DC01.corp.local` (Windows)
-  - [ ] `nslookup DC01.corp.local` (Linux)
+  - [ ] `Resolve-DnsName DC01.goldshire.local` (Windows)
+  - [ ] `nslookup DC01.goldshire.local` (Linux)
 
-- [ ] **wazuh.corp.local**
+- [ ] **wazuh.goldshire.local**
   - [ ] Resolves to 192.168.100.20
-  - [ ] `Resolve-DnsName wazuh.corp.local`
+  - [ ] `Resolve-DnsName wazuh.goldshire.local`
 
-- [ ] **WEB01.corp.local**
+- [ ] **WEB01.goldshire.local**
   - [ ] Resolves to 192.168.101.10
-  - [ ] `Resolve-DnsName WEB01.corp.local`
+  - [ ] `Resolve-DnsName WEB01.goldshire.local`
 
-- [ ] **CLIENT01.corp.local**
+- [ ] **CLIENT01.goldshire.local**
   - [ ] Resolves to 192.168.100.50
-  - [ ] `Resolve-DnsName CLIENT01.corp.local`
+  - [ ] `Resolve-DnsName CLIENT01.goldshire.local`
 
 ### 2.2 Reverse Lookup
 
-- [ ] **192.168.100.10** → DC01.corp.local
-- [ ] **192.168.100.20** → wazuh.corp.local
-- [ ] **192.168.101.10** → WEB01.corp.local
-- [ ] **192.168.100.50** → CLIENT01.corp.local
+- [ ] **192.168.100.10** → DC01.goldshire.local
+- [ ] **192.168.100.20** → wazuh.goldshire.local
+- [ ] **192.168.101.10** → WEB01.goldshire.local
+- [ ] **192.168.100.50** → CLIENT01.goldshire.local
 
 ### 2.3 External DNS Resolution
 
@@ -145,7 +145,7 @@ Get-ADDomainController
 Get-ADForest
 ```
 
-- [ ] Domain name is `corp.local`
+- [ ] Domain name is `goldshire.local`
 - [ ] Domain functional level is correct
 - [ ] Forest functional level is correct
 - [ ] Domain controller is listed
@@ -194,7 +194,7 @@ ipconfig /all
 - [ ] Client receives IP in range 192.168.100.100-199
 - [ ] Default gateway is 192.168.100.1
 - [ ] DNS server is 192.168.100.10
-- [ ] Domain name is corp.local
+- [ ] Domain name is goldshire.local
 
 ### 4.3 Reservations
 
@@ -267,7 +267,7 @@ Write-EventLog -LogName Application -Source "Test" -EventID 9999 -EntryType Info
 **From Client:**
 
 - [ ] Can access: `http://192.168.101.10`
-- [ ] Can access: `http://WEB01.corp.local`
+- [ ] Can access: `http://WEB01.goldshire.local`
 - [ ] Website loads correctly
 - [ ] No errors in browser
 

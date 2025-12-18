@@ -16,9 +16,9 @@ The lab uses a segmented network architecture with:
 | IP Address | Hostname | Role | Notes |
 |------------|----------|------|-------|
 | 192.168.100.1 | pfsense | Gateway | pfSense LAN interface |
-| 192.168.100.10 | DC01.corp.local | Domain Controller | AD DS, DNS, DHCP |
-| 192.168.100.20 | wazuh.corp.local | SIEM | Wazuh manager |
-| 192.168.100.50 | CLIENT01.corp.local | Workstation | Windows client |
+| 192.168.100.10 | DC01.goldshire.local | Domain Controller | AD DS, DNS, DHCP |
+| 192.168.100.20 | wazuh.goldshire.local | SIEM | Wazuh manager |
+| 192.168.100.50 | CLIENT01.goldshire.local | Workstation | Windows client |
 | 192.168.100.100-199 | - | DHCP Pool | Dynamic assignments |
 | 192.168.100.200-254 | - | Reserved | Future expansion |
 
@@ -27,7 +27,7 @@ The lab uses a segmented network architecture with:
 | IP Address | Hostname | Role | Notes |
 |------------|----------|------|-------|
 | 192.168.101.1 | - | Gateway | pfSense OPT1 interface |
-| 192.168.101.10 | WEB01.corp.local | Web Server | IIS server |
+| 192.168.101.10 | WEB01.goldshire.local | Web Server | IIS server |
 | 192.168.101.100-254 | - | Reserved | Future expansion |
 
 ## Network Configuration Checklist
@@ -38,15 +38,15 @@ Before proceeding, document your network plan:
 - [ ] DMZ network subnet: 192.168.101.0/24
 - [ ] Gateway IP: 192.168.100.1
 - [ ] DNS server IP: 192.168.100.10
-- [ ] Domain name: corp.local
+- [ ] Domain name: goldshire.local
 - [ ] All static IPs planned (will be assigned during VM configuration)
 
 ## DNS Configuration
 
 ### Forward Lookup Zone
 
-**Zone Name:** corp.local
-**Primary Server:** DC01.corp.local (192.168.100.10)
+**Zone Name:** goldshire.local
+**Primary Server:** DC01.goldshire.local (192.168.100.10)
 
 ### DNS Records to Create
 
@@ -72,7 +72,7 @@ Before proceeding, document your network plan:
 - **Subnet Mask:** 255.255.255.0
 - **Default Gateway:** 192.168.100.1
 - **DNS Servers:** 192.168.100.10, 192.168.100.1
-- **Domain Name:** corp.local
+- **Domain Name:** goldshire.local
 - **Lease Duration:** 8 days
 
 ### Reservations
@@ -139,8 +139,8 @@ After setup, test the following:
    - [ ] Ping from internal to DMZ
 
 2. **DNS Tests**
-   - [ ] Resolve DC01.corp.local
-   - [ ] Resolve WEB01.corp.local
+   - [ ] Resolve DC01.goldshire.local
+   - [ ] Resolve WEB01.goldshire.local
    - [ ] Reverse DNS lookup works
 
 3. **DHCP Tests**
@@ -174,7 +174,7 @@ Use this template to document your network:
 
 ## DNS
 - Primary: 192.168.100.10
-- Domain: corp.local
+- Domain: goldshire.local
 
 ## DHCP
 - Range: 192.168.100.100-199
