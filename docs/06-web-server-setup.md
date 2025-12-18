@@ -191,12 +191,24 @@ This guide covers the installation and configuration of IIS web server on Window
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lab Web Server</title>
+    <title>Goldshire Consulting - Internal Portal</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; }
+        .info { color: #7f8c8d; margin-top: 20px; }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Lab Web Server</h1>
-    <p>Server: WEB01.corp.local</p>
-    <p>IP: 192.168.101.10</p>
+    <div class="container">
+        <h1>Welcome to Goldshire Consulting</h1>
+        <p>Internal Employee Portal</p>
+        <div class="info">
+            <p><strong>Server:</strong> WEB01.corp.local</p>
+            <p><strong>IP:</strong> 192.168.101.10</p>
+            <p><strong>Domain:</strong> corp.local</p>
+        </div>
+    </div>
 </body>
 </html>
 ```

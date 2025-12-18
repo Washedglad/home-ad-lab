@@ -448,8 +448,15 @@ If not using AD DHCP, configure pfSense DHCP:
 1. Go to **System > General Setup**
 2. Configure:
    - **Hostname:** pfsense
-   - **Domain:** corp.local
+   - **Domain:** `home.arpa` or `corp.lab` (see important note below)
 3. Save
+
+**Important - Domain Name Warning:**
+- pfSense warns against using `.local` as the TLD (conflicts with mDNS)
+- **For pfSense router domain:** Use `home.arpa`, `corp.lab`, or `local.lan`
+- **For Active Directory domain:** You can still use `corp.local` (it's fine for lab environments)
+- The pfSense domain is separate from your AD domain
+- In this lab: pfSense uses `home.arpa`, AD uses `corp.local`
 
 ### Web Interface Settings
 
