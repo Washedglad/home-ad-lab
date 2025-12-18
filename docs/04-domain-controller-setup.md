@@ -27,12 +27,17 @@ This guide covers the installation and configuration of Active Directory Domain 
 1. Open VMware Workstation
 2. Click **Create a New Virtual Machine**
 3. Select **Typical** configuration
-4. Choose **I will install the operating system later**
+4. Choose **I will install the operating system later** (recommended) OR use Easy Install
 5. Select **Microsoft Windows Server 2019/2022**
 6. Name: `DC01` or `DomainController`
 7. Location: Choose your lab folder
 8. Disk size: 60GB
-9. Click **Customize Hardware** before finishing
+9. **If using Easy Install:**
+   - **Windows product key:** Enter evaluation key from [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2019)
+   - **Version:** Windows Server 2019 Datacenter (or Standard)
+   - **Full name:** (optional)
+   - **Password:** Set administrator password
+10. Click **Customize Hardware** before finishing
 
 ### Configure Network Adapter
 
