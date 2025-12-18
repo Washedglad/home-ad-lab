@@ -49,6 +49,7 @@ The lab consists of the following components:
 7. [Client Workstation Setup](./docs/07-client-setup.md)
 8. [Component Integration](./docs/08-integration.md)
 9. [Verification & Testing](./docs/09-verification.md)
+10. [Kali Linux Setup](./docs/KALI_LINUX_SETUP.md) - Accessing lab from Kali and switching between lab/internet
 
 ### Lab Exercises (labs/)
 - [Lab 01: Basic AD Management](./labs/lab-01-basic-ad.md)

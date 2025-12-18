@@ -35,12 +35,29 @@ This guide covers the installation and configuration of pfSense firewall for the
 ### Configure Network Adapters
 
 1. In Hardware settings:
-   - **Network Adapter 1:** Custom (VMnet2) - This will be WAN
+   - **Network Adapter 1:** NAT - This will be WAN (for internet access during installation)
    - **Network Adapter 2:** Custom (VMnet2) - This will be LAN
    - **Network Adapter 3:** Custom (VMnet2) - This will be OPT1 (DMZ)
 2. Click **Finish**
 
 **Note:** We'll configure which interface is which during pfSense installation.
+
+### Lab Network Isolation (Optional)
+
+For complete lab isolation, you can disable the NAT adapter after installation:
+
+1. **After pfSense installation is complete:**
+   - Shut down pfSense VM
+   - In VMware, go to **Settings > Network Adapter**
+   - Uncheck **"Connected"** for the NAT adapter (Network Adapter 1)
+   - This isolates the lab from your host network
+
+2. **To restore internet access:**
+   - Shut down pfSense VM
+   - In VMware, go to **Settings > Network Adapter**
+   - Check **"Connected"** for the NAT adapter
+   - Power on pfSense
+   - WAN interface will get internet access via NAT
 
 ## Step 2: Install pfSense
 
@@ -536,6 +553,43 @@ If not using AD DHCP, configure pfSense DHCP:
    - Don't interrupt installation process
    - Wait for "Installation complete" message before rebooting
    - Ensure ISO is unmounted after installation to boot from disk
+
+## Network Adapter Management
+
+### Lab Isolation
+
+For complete lab isolation from your host network:
+
+**pfSense:**
+- Disable the NAT adapter (Network Adapter 1) by unchecking "Connected" in VMware
+- This isolates the lab network from your host
+- Lab VMs can still communicate with each other via VMnet2
+
+**Kali Linux or Other Tools:**
+- If using Kali Linux for lab activities, configure it to use VMnet2 (lab network)
+- Disable any NAT adapters to keep it isolated
+- This ensures all traffic stays within the lab environment
+
+### Restoring Internet Access
+
+When you need internet access for activities like TryHackMe, CTF challenges, or updates:
+
+**pfSense:**
+1. Shut down pfSense VM
+2. In VMware: **Settings > Network Adapter** (Adapter 1)
+3. Check **"Connected"** for the NAT adapter
+4. Power on pfSense
+5. WAN interface will automatically get internet via NAT
+
+**Kali Linux:**
+1. Shut down Kali VM
+2. In VMware: **Settings > Network Adapter**
+3. Change from **Custom (VMnet2)** to **NAT**
+4. Or add a second adapter set to **NAT** (keep VMnet2 for lab access)
+5. Power on Kali
+6. Configure network settings for internet access
+
+**Note:** You can have both adapters active - one for lab (VMnet2) and one for internet (NAT). This allows you to access both the lab and internet simultaneously.
 
 ## Next Steps
 
