@@ -51,16 +51,16 @@ goldshire.local
 
 | Username | Full Name | Department | Password |
 |----------|-----------|------------|----------|
-| itadmin | IT Administrator | IT | P@ssw0rd123! |
-| itsupport | IT Support | IT | P@ssw0rd123! |
+| gelbin | Gelbin Mekkatorque | IT | Password123! |
+| tinkmaster | Tinkmaster Overspark | IT | Welcome2024! |
 
 3. Navigate to **Users > Sales**
 4. Create users:
 
 | Username | Full Name | Department | Password |
 |----------|-----------|------------|----------|
-| sales1 | Sales Rep 1 | Sales | P@ssw0rd123! |
-| sales2 | Sales Rep 2 | Sales | P@ssw0rd123! |
+| gazlowe | Gazlowe | Sales | password |
+| tradewind | Tradewind | Sales | 12345678 |
 
 5. Navigate to **Users > Management**
 6. Create user:
@@ -90,9 +90,8 @@ goldshire.local
 | Managers | Security - Global | Management Team |
 
 3. Add users to appropriate groups:
-   - **IT_Admins:** itadmin
-   - **IT_Support:** itsupport
-   - **Sales_Team:** sales1, sales2
+   - **IT Department:** gelbin, tinkmaster, khazmodan
+   - **Sales Department:** gallywix, gazlowe, tradewind
    - **Managers:** manager1
 
 **Expected Result:** Groups created and users assigned.
@@ -133,7 +132,7 @@ goldshire.local
 
 **Steps:**
 
-1. Select user `itadmin`
+1. Select user `gelbin`
 2. Right-click > **Properties**
 3. Configure:
    - **General:** Add description, office location

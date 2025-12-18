@@ -96,10 +96,10 @@ This lab is for **educational purposes only** in a controlled, isolated environm
 1. **Review user account list:**
    - See [LAB_USER_ACCOUNTS.md](../docs/LAB_USER_ACCOUNTS.md) for all accounts
    - Identify accounts with weak passwords:
-     - `sales1` - password: `password`
-     - `sales2` - password: `12345678`
-     - `hr1` - password: `hr2024`
-     - `compromised_user` - password: `P@ssw0rd`
+     - `gazlowe` - password: `password`
+     - `tradewind` - password: `12345678`
+     - `turalyon` - password: `hr2024`
+     - `arthas` - password: `P@ssw0rd`
 
 2. **Create password list:**
    - Extract weak passwords from documentation
