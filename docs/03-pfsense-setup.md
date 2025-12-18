@@ -548,6 +548,22 @@ If not using AD DHCP, configure pfSense DHCP:
   - em1 → LAN
   - em2 → OPT1
 
+### DNS Resolver Configuration Error
+
+**Problem:** Error message: "This system is configured to use the DNS Resolver as its DNS server, so Localhost or All must be selected in Network Interfaces"
+
+**Cause:**
+- pfSense is configured to use DNS Resolver as its own DNS server
+- Network Interfaces only has specific interfaces selected (LAN, OPT1)
+- Localhost is not included, so pfSense can't query itself
+
+**Solution:**
+- In **Services > DNS Resolver > General Settings**
+- Change **Network Interfaces** from specific interfaces to **"All"**
+- "All" includes LAN, OPT1, and localhost
+- This allows pfSense to use its own DNS Resolver
+- Save and the error will be resolved
+
 ### Installation Fails or mountroot> Prompt Appears
 
 **Problem:** Installation fails with "Child process terminated abnormally: Killed" or system shows `mountroot>` prompt after reboot
