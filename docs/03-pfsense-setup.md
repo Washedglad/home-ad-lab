@@ -392,6 +392,8 @@ If you need to access services from host:
 
 **Note:** Primary DNS will be the Domain Controller (192.168.100.10) once configured. The forwarders are used for external DNS queries.
 
+**Important:** After installing your Domain Controller, you must also configure pfSense's own DNS servers to point to the DC. See [08-integration.md](./08-integration.md) - Step 2 for complete instructions on configuring pfSense DNS after AD setup.
+
 ## Step 7: Configure DHCP Relay (Optional)
 
 If not using AD DHCP, configure pfSense DHCP:

@@ -76,7 +76,126 @@ Test-Connection -ComputerName 192.168.100.20
 Test-Connection -ComputerName 192.168.101.10
 ```
 
-## Step 2: Verify DNS Resolution
+## Step 2: Configure pfSense DNS (Post-AD Setup)
+
+After your Domain Controller is installed and AD DS is configured, you need to update pfSense to use the DC as its DNS server. This ensures pfSense can resolve domain names and forward queries correctly.
+
+### Why This Is Important
+
+- **Active Directory requires DNS:** AD uses DNS for service discovery, authentication, and domain resolution
+- **pfSense needs DNS:** pfSense itself needs DNS to resolve names and forward queries
+- **Client DNS:** Clients get DNS settings from AD DHCP, but pfSense needs manual configuration
+
+### Step 2.1: Configure pfSense's DNS Servers
+
+1. **Access pfSense Web Interface:**
+   - Navigate to: `https://192.168.100.1`
+   - Log in with admin credentials
+
+2. **Go to System > General Setup:**
+   - Scroll down to **DNS Server Settings** section
+
+3. **Configure DNS Servers:**
+   - **DNS Server 1:** `192.168.100.10` (Domain Controller)
+   - **DNS Server 2:** `8.8.8.8` (Google - fallback for external DNS)
+   - **DNS Server 3:** `1.1.1.1` (Cloudflare - optional fallback)
+   - **DNS Server 4:** (leave blank)
+
+4. **Optional Settings:**
+   - Uncheck **"Allow DNS server list to be overridden by DHCP/PPP on WAN"** (keeps DC as primary)
+   - This prevents WAN DHCP from changing your DNS settings
+
+5. **Save** the configuration
+
+**What this does:** Makes pfSense use the Domain Controller for DNS queries. pfSense will query the DC for internal domain names (like `goldshire.local`) and forward external queries to the DC, which then forwards to external DNS servers.
+
+### Step 2.2: Configure DNS Resolver (if not already done)
+
+1. **Go to Services > DNS Resolver > General Settings**
+
+2. **Enable DNS Resolver:**
+   - ✅ **Enable DNS Resolver** (check the box)
+
+3. **Configure Network Interfaces:**
+   - **Network Interfaces:** Select **"All"** (important!)
+   - This includes LAN, OPT1, and localhost
+   - **Why:** pfSense needs to query its own DNS Resolver
+
+4. **Configure Outgoing Interfaces:**
+   - **Outgoing Network Interfaces:** WAN (or leave default)
+   - This is where external queries go
+
+5. **Configure DNS Query Forwarding:**
+   - Scroll to **"DNS Query Forwarding"** section
+   - Click **Add** button
+   - Enter: `8.8.8.8` (Google DNS)
+   - Click **Add** again
+   - Enter: `1.1.1.1` (Cloudflare DNS)
+   - These forward external queries while DC handles internal queries
+
+6. **Save** the configuration
+
+**Important Note:** If you see an error "This system is configured to use the DNS Resolver as its DNS server, so Localhost or All must be selected in Network Interfaces":
+- Change **Network Interfaces** to **"All"** (not just specific interfaces)
+- This is required because pfSense uses its own DNS Resolver
+
+### Step 2.3: Verify DNS Configuration
+
+1. **Test from pfSense Console:**
+   - Access pfSense console (VM console or SSH)
+   - Type `8` for Shell
+   - Test DNS resolution:
+     ```bash
+     nslookup DC01.goldshire.local 192.168.100.10
+     nslookup google.com
+     ```
+
+2. **Test from Web Interface:**
+   - Go to **Diagnostics > DNS Lookup**
+   - Test internal domain: `DC01.goldshire.local`
+   - Should resolve to `192.168.100.10`
+   - Test external domain: `google.com`
+   - Should resolve to Google's IP
+
+3. **Check DNS Resolver Status:**
+   - Go to **Status > Services**
+   - Verify **unbound** (DNS Resolver) service is running
+
+### Step 2.4: Add DNS Records for Web Server (Optional)
+
+If you want to access your web server by name instead of IP:
+
+1. **On Domain Controller:**
+   - Open **DNS Manager** (dnsmgmt.msc)
+   - Navigate to **Forward Lookup Zones > goldshire.local**
+   - Right-click → **New Host (A or AAAA)**
+   - **Name:** `www` (or `web`, `portal`, etc.)
+   - **IP Address:** `192.168.101.10` (your web server IP)
+   - Check **"Create associated pointer (PTR) record"** (optional)
+   - Click **Add Host**
+
+2. **Test from pfSense:**
+   - Go to **Diagnostics > DNS Lookup**
+   - Test: `www.goldshire.local`
+   - Should resolve to `192.168.101.10`
+
+3. **Test from Client:**
+   ```powershell
+   Resolve-DnsName -Name www.goldshire.local
+   ```
+
+### Summary
+
+After completing this step:
+- ✅ pfSense uses DC (192.168.100.10) as primary DNS
+- ✅ DNS Resolver is enabled and forwarding external queries
+- ✅ pfSense can resolve internal domain names (goldshire.local)
+- ✅ pfSense can resolve external domain names (via forwarders)
+- ✅ Optional: Web server accessible by name (www.goldshire.local)
+
+**Note:** Client VMs get DNS settings automatically from AD DHCP, so they don't need manual configuration. Only pfSense needs this manual DNS configuration.
+
+## Step 3: Verify DNS Resolution
 
 ### Test DNS from All Machines
 
@@ -116,7 +235,7 @@ Resolve-DnsName -Name 192.168.100.20 -Type PTR
 Resolve-DnsName -Name 192.168.101.10 -Type PTR
 ```
 
-## Step 3: Verify Domain Services
+## Step 4: Verify Domain Services
 
 ### Test Domain Authentication
 
@@ -152,7 +271,7 @@ gpresult /h C:\gpresult.html
 2. **Test domain user permissions**
 3. **Verify OU structure**
 
-## Step 4: Configure Wazuh Agent Integration
+## Step 5: Configure Wazuh Agent Integration
 
 ### Verify All Agents Are Connected
 
@@ -177,7 +296,7 @@ gpresult /h C:\gpresult.html
 2. Verify events from all agents appear
 3. Check event details and timestamps
 
-## Step 5: Configure Log Forwarding
+## Step 6: Configure Log Forwarding
 
 ### Windows Event Log Forwarding
 
@@ -211,7 +330,7 @@ gpresult /h C:\gpresult.html
 3. Check event correlation works
 4. Verify alerts are generated (if configured)
 
-## Step 6: Configure Firewall Integration
+## Step 7: Configure Firewall Integration
 
 ### Verify Firewall Rules
 
@@ -238,7 +357,7 @@ gpresult /h C:\gpresult.html
    - Create rules for firewall events
    - Set up alerts for suspicious activity
 
-## Step 7: Test End-to-End Scenarios
+## Step 8: Test End-to-End Scenarios
 
 ### Scenario 1: User Authentication Flow
 
@@ -293,7 +412,7 @@ gpresult /h C:\gpresult.html
 - Timestamps are correct
 - Event details are complete
 
-## Step 8: Configure Monitoring and Alerts
+## Step 9: Configure Monitoring and Alerts
 
 ### Set Up Wazuh Alerts
 
@@ -321,7 +440,7 @@ gpresult /h C:\gpresult.html
    - Test email alerts
    - Verify alerts are sent
 
-## Step 9: Performance Verification
+## Step 10: Performance Verification
 
 ### Check Resource Usage
 
@@ -343,7 +462,7 @@ gpresult /h C:\gpresult.html
 3. Verify all systems handle load
 4. Check for bottlenecks
 
-## Step 10: Security Verification
+## Step 11: Security Verification
 
 ### Verify Security Posture
 
