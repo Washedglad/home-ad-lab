@@ -36,8 +36,9 @@
 
 #### Windows Server 2019/2022
 - **Edition:** Standard or Datacenter
-- **ISO:** Download from Microsoft Evaluation Center
-- **License:** Evaluation license (180 days) or valid license
+- **ISO:** Download from [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2019)
+- **Evaluation Key:** Available on the download page after registration
+- **License:** Evaluation license (180 days, can be rearmed up to 5 times = ~3 years total)
 - **RAM:** 4GB minimum, 8GB recommended for DC
 - **Disk:** 60GB minimum
 

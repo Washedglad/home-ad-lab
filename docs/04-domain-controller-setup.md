@@ -7,7 +7,8 @@ This guide covers the installation and configuration of Active Directory Domain 
 - VMware Workstation configured
 - pfSense firewall running
 - Windows Server 2019/2022 ISO downloaded
-- Valid license or evaluation key
+  - Download from [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2019)
+  - Evaluation key available on download page (180-day evaluation)
 - Network plan completed
 
 ## Step 1: Create Domain Controller VM
@@ -54,7 +55,14 @@ This guide covers the installation and configuration of Active Directory Domain 
 1. Boot from ISO
 2. Select language, time, keyboard
 3. Click **Install Now**
-4. Enter product key (or skip for evaluation)
+4. **Product Key:**
+   - **Option 1 (Evaluation - No Key):** Click **I don't have a product key** to use 180-day evaluation
+   - **Option 2 (Evaluation Key):** Get evaluation key from [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2019)
+     - Select Windows Server 2019 (or 2022)
+     - Register and download evaluation ISO
+     - Evaluation key is provided on the download page
+     - Valid for 180 days, can be rearmed up to 5 times (total ~3 years)
+   - **Option 3 (VMware Easy Install):** If using VMware's Easy Install, enter evaluation key in the wizard
 5. Select **Windows Server 2019/2022 Standard (Desktop Experience)** or **Datacenter**
 6. Accept license terms
 7. Select **Custom: Install Windows only**
