@@ -153,71 +153,71 @@ Write-Host "Creating User Accounts..." -ForegroundColor Cyan
 Write-Host ""
 
 # IT Department Users
-New-UserIfNotExists -SamAccountName "itadmin" -Name "IT Administrator" -GivenName "IT" -Surname "Administrator" -DisplayName "IT Administrator" `
-    -Password "Password123!" -Path "OU=IT Department,$UsersOU" -Description "IT Administrator with domain admin privileges" `
-    -Groups @("Domain Admins", "IT Department", "Administrators") -Email "itadmin@goldshire.local"
+New-UserIfNotExists -SamAccountName "gelbin" -Name "Gelbin Mekkatorque" -GivenName "Gelbin" -Surname "Mekkatorque" -DisplayName "Gelbin Mekkatorque" `
+    -Password "Password123!" -Path "OU=IT Department,$UsersOU" -Description "IT Administrator with domain admin privileges (Gnomeregan)" `
+    -Groups @("Domain Admins", "IT Department", "Administrators") -Email "gelbin@goldshire.local"
 
-New-UserIfNotExists -SamAccountName "itsupport" -Name "IT Support" -GivenName "IT" -Surname "Support" -DisplayName "IT Support" `
-    -Password "Welcome2024!" -Path "OU=IT Department,$UsersOU" -Description "IT Support Technician" `
-    -Groups @("Help Desk", "IT Department") -Email "itsupport@goldshire.local"
+New-UserIfNotExists -SamAccountName "tinkmaster" -Name "Tinkmaster Overspark" -GivenName "Tinkmaster" -Surname "Overspark" -DisplayName "Tinkmaster Overspark" `
+    -Password "Welcome2024!" -Path "OU=IT Department,$UsersOU" -Description "IT Support Technician (Gnomeregan)" `
+    -Groups @("Help Desk", "IT Department") -Email "tinkmaster@goldshire.local"
 
-New-UserIfNotExists -SamAccountName "networkadmin" -Name "Network Administrator" -GivenName "Network" -Surname "Administrator" -DisplayName "Network Administrator" `
-    -Password "NetAdmin123" -Path "OU=IT Department,$UsersOU" -Description "Network Administrator" `
-    -Groups @("Network Operators", "IT Department") -Email "networkadmin@goldshire.local"
+New-UserIfNotExists -SamAccountName "khazmodan" -Name "Khaz Modan" -GivenName "Khaz" -Surname "Modan" -DisplayName "Khaz Modan" `
+    -Password "NetAdmin123" -Path "OU=IT Department,$UsersOU" -Description "Network Administrator (Dwarf region)" `
+    -Groups @("Network Operators", "IT Department") -Email "khazmodan@goldshire.local"
 
 # Sales Department Users
-New-UserIfNotExists -SamAccountName "salesmanager" -Name "Sales Manager" -GivenName "Sales" -Surname "Manager" -DisplayName "Sales Manager" `
-    -Password "Sales2024!" -Path "OU=Sales Department,$UsersOU" -Description "Sales Department Manager" `
-    -Groups @("Sales Department", "Managers") -Email "salesmanager@goldshire.local"
+New-UserIfNotExists -SamAccountName "gallywix" -Name "Trade Prince Gallywix" -GivenName "Trade Prince" -Surname "Gallywix" -DisplayName "Trade Prince Gallywix" `
+    -Password "Sales2024!" -Path "OU=Sales Department,$UsersOU" -Description "Sales Department Manager (Goblin)" `
+    -Groups @("Sales Department", "Managers") -Email "gallywix@goldshire.local"
 
-New-UserIfNotExists -SamAccountName "sales1" -Name "Sales Representative 1" -GivenName "Sales" -Surname "Rep1" -DisplayName "Sales Representative 1" `
-    -Password "password" -Path "OU=Sales Department,$UsersOU" -Description "Sales Representative" `
-    -Groups @("Sales Department") -Email "sales1@goldshire.local"
+New-UserIfNotExists -SamAccountName "gazlowe" -Name "Gazlowe" -GivenName "Gazlowe" -Surname "" -DisplayName "Gazlowe" `
+    -Password "password" -Path "OU=Sales Department,$UsersOU" -Description "Sales Representative (Goblin Engineer)" `
+    -Groups @("Sales Department") -Email "gazlowe@goldshire.local"
 
-New-UserIfNotExists -SamAccountName "sales2" -Name "Sales Representative 2" -GivenName "Sales" -Surname "Rep2" -DisplayName "Sales Representative 2" `
-    -Password "12345678" -Path "OU=Sales Department,$UsersOU" -Description "Sales Representative" `
-    -Groups @("Sales Department") -Email "sales2@goldshire.local"
+New-UserIfNotExists -SamAccountName "tradewind" -Name "Tradewind" -GivenName "Tradewind" -Surname "" -DisplayName "Tradewind" `
+    -Password "12345678" -Path "OU=Sales Department,$UsersOU" -Description "Sales Representative (Goblin Trader)" `
+    -Groups @("Sales Department") -Email "tradewind@goldshire.local"
 
 # HR Department Users
-New-UserIfNotExists -SamAccountName "hrdirector" -Name "HR Director" -GivenName "HR" -Surname "Director" -DisplayName "HR Director" `
-    -Password "HRDirector1!" -Path "OU=HR Department,$UsersOU" -Description "Human Resources Director" `
-    -Groups @("HR Department", "Managers", "HR Admins") -Email "hrdirector@goldshire.local"
+New-UserIfNotExists -SamAccountName "jaina" -Name "Jaina Proudmoore" -GivenName "Jaina" -Surname "Proudmoore" -DisplayName "Jaina Proudmoore" `
+    -Password "HRDirector1!" -Path "OU=HR Department,$UsersOU" -Description "Human Resources Director (Lord Admiral)" `
+    -Groups @("HR Department", "Managers", "HR Admins") -Email "jaina@goldshire.local"
 
-New-UserIfNotExists -SamAccountName "hr1" -Name "HR Assistant" -GivenName "HR" -Surname "Assistant" -DisplayName "HR Assistant" `
-    -Password "hr2024" -Path "OU=HR Department,$UsersOU" -Description "HR Assistant" `
-    -Groups @("HR Department") -Email "hr1@goldshire.local"
+New-UserIfNotExists -SamAccountName "turalyon" -Name "Turalyon" -GivenName "Turalyon" -Surname "" -DisplayName "Turalyon" `
+    -Password "hr2024" -Path "OU=HR Department,$UsersOU" -Description "HR Assistant (Alliance Commander)" `
+    -Groups @("HR Department") -Email "turalyon@goldshire.local"
 
 # Management Users
-New-UserIfNotExists -SamAccountName "ceo" -Name "Chief Executive Officer" -GivenName "Chief" -Surname "Executive" -DisplayName "Chief Executive Officer" `
-    -Password "CEO2024!" -Path "OU=Management,$UsersOU" -Description "Chief Executive Officer" `
-    -Groups @("Executives", "Managers") -Email "ceo@goldshire.local"
+New-UserIfNotExists -SamAccountName "anduin" -Name "Anduin Wrynn" -GivenName "Anduin" -Surname "Wrynn" -DisplayName "Anduin Wrynn" `
+    -Password "CEO2024!" -Path "OU=Management,$UsersOU" -Description "Chief Executive Officer (King of Stormwind)" `
+    -Groups @("Executives", "Managers") -Email "anduin@goldshire.local"
 
-New-UserIfNotExists -SamAccountName "cfo" -Name "Chief Financial Officer" -GivenName "Chief" -Surname "Financial" -DisplayName "Chief Financial Officer" `
-    -Password "Finance2024!" -Path "OU=Management,$UsersOU" -Description "Chief Financial Officer" `
-    -Groups @("Executives", "Finance", "Managers") -Email "cfo@goldshire.local"
+New-UserIfNotExists -SamAccountName "genn" -Name "Genn Greymane" -GivenName "Genn" -Surname "Greymane" -DisplayName "Genn Greymane" `
+    -Password "Finance2024!" -Path "OU=Management,$UsersOU" -Description "Chief Financial Officer (King of Gilneas)" `
+    -Groups @("Executives", "Finance", "Managers") -Email "genn@goldshire.local"
 
 # Service Accounts
-New-UserIfNotExists -SamAccountName "svc_web" -Name "Web Service Account" -GivenName "Web" -Surname "Service" -DisplayName "Web Service Account" `
-    -Password "ServiceAccount1!" -Path "OU=Service Accounts,$UsersOU" -Description "Service account for web applications" `
-    -Groups @("IIS_IUSRS") -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_web@goldshire.local"
+New-UserIfNotExists -SamAccountName "svc_azeroth" -Name "Azeroth Service Account" -GivenName "Azeroth" -Surname "Service" -DisplayName "Azeroth Service Account" `
+    -Password "ServiceAccount1!" -Path "OU=Service Accounts,$UsersOU" -Description "Service account for web applications (Azeroth)" `
+    -Groups @("IIS_IUSRS") -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_azeroth@goldshire.local"
 
-New-UserIfNotExists -SamAccountName "svc_backup" -Name "Backup Service Account" -GivenName "Backup" -Surname "Service" -DisplayName "Backup Service Account" `
-    -Password "Backup123!" -Path "OU=Service Accounts,$UsersOU" -Description "Service account for backup operations" `
-    -Groups @("Backup Operators") -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_backup@goldshire.local"
+New-UserIfNotExists -SamAccountName "svc_dalaran" -Name "Dalaran Service Account" -GivenName "Dalaran" -Surname "Service" -DisplayName "Dalaran Service Account" `
+    -Password "Backup123!" -Path "OU=Service Accounts,$UsersOU" -Description "Service account for backup operations (Dalaran)" `
+    -Groups @("Backup Operators") -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_dalaran@goldshire.local"
 
 # Security Team Users
-New-UserIfNotExists -SamAccountName "securityanalyst" -Name "Security Analyst" -GivenName "Security" -Surname "Analyst" -DisplayName "Security Analyst" `
-    -Password "Security2024!" -Path "OU=Security Team,$UsersOU" -Description "Security Analyst" `
-    -Groups @("Security Team", "Event Log Readers") -Email "securityanalyst@goldshire.local"
+New-UserIfNotExists -SamAccountName "maiev" -Name "Maiev Shadowsong" -GivenName "Maiev" -Surname "Shadowsong" -DisplayName "Maiev Shadowsong" `
+    -Password "Security2024!" -Path "OU=Security Team,$UsersOU" -Description "Security Analyst (Warden)" `
+    -Groups @("Security Team", "Event Log Readers") -Email "maiev@goldshire.local"
 
 # Test/Compromised Accounts
-New-UserIfNotExists -SamAccountName "compromised_user" -Name "Compromised User" -GivenName "Compromised" -Surname "User" -DisplayName "Compromised User" `
-    -Password "P@ssw0rd" -Path $UsersOU -Description "Pre-compromised account for attack simulation" `
-    -Groups @() -Email "compromised_user@goldshire.local"
+New-UserIfNotExists -SamAccountName "arthas" -Name "Arthas Menethil" -GivenName "Arthas" -Surname "Menethil" -DisplayName "Arthas Menethil" `
+    -Password "P@ssw0rd" -Path $UsersOU -Description "Pre-compromised account for attack simulation (Fallen Prince)" `
+    -Groups @() -Email "arthas@goldshire.local"
 
-New-UserIfNotExists -SamAccountName "disabled_user" -Name "Disabled User" -GivenName "Disabled" -Surname "User" -DisplayName "Disabled User" `
-    -Password "OldPassword123!" -Path $UsersOU -Description "Disabled account for enumeration testing" `
-    -Groups @() -Enabled $false -Email "disabled_user@goldshire.local"
+New-UserIfNotExists -SamAccountName "varian" -Name "Varian Wrynn" -GivenName "Varian" -Surname "Wrynn" -DisplayName "Varian Wrynn" `
+    -Password "OldPassword123!" -Path $UsersOU -Description "Disabled account for enumeration testing (Former King)" `
+    -Groups @() -Enabled $false -Email "varian@goldshire.local"
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan

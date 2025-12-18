@@ -16,9 +16,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 
 **Purpose:** High-privilege accounts for privilege escalation and lateral movement scenarios.
 
-#### itadmin - IT Administrator
-- **Username:** `itadmin`
-- **Full Name:** IT Administrator
+#### gelbin - IT Administrator (Gelbin Mekkatorque - Gnomeregan)
+- **Username:** `gelbin`
+- **Full Name:** Gelbin Mekkatorque
 - **Password:** `Password123!`
 - **Email:** itadmin@goldshire.local
 - **Groups:** Domain Admins, IT Department, Administrators
@@ -32,9 +32,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
   - Lateral movement to domain admin
   - Golden ticket attack simulation
 
-#### itsupport - IT Support Technician
-- **Username:** `itsupport`
-- **Full Name:** IT Support
+#### tinkmaster - IT Support Technician (Tinkmaster Overspark - Gnomeregan)
+- **Username:** `tinkmaster`
+- **Full Name:** Tinkmaster Overspark
 - **Password:** `Welcome2024!`
 - **Email:** itsupport@goldshire.local
 - **Groups:** Help Desk, IT Department, Domain Users
@@ -48,9 +48,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
   - Help desk privilege abuse
   - Credential dumping
 
-#### networkadmin - Network Administrator
-- **Username:** `networkadmin`
-- **Full Name:** Network Administrator
+#### khazmodan - Network Administrator (Khaz Modan - Dwarf region)
+- **Username:** `khazmodan`
+- **Full Name:** Khaz Modan
 - **Password:** `NetAdmin123`
 - **Email:** networkadmin@goldshire.local
 - **Groups:** Network Operators, IT Department, Domain Users
@@ -69,9 +69,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 
 **Purpose:** Regular users for phishing, social engineering, and weak password exploitation scenarios.
 
-#### salesmanager - Sales Manager
-- **Username:** `salesmanager`
-- **Full Name:** Sales Manager
+#### gallywix - Sales Manager (Trade Prince Gallywix - Goblin)
+- **Username:** `gallywix`
+- **Full Name:** Trade Prince Gallywix
 - **Password:** `Sales2024!`
 - **Email:** salesmanager@goldshire.local
 - **Groups:** Sales Department, Managers, Domain Users
@@ -85,9 +85,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
   - Social engineering target
   - Manager-level access abuse
 
-#### sales1 - Sales Representative
-- **Username:** `sales1`
-- **Full Name:** Sales Representative 1
+#### gazlowe - Sales Representative (Gazlowe - Goblin Engineer)
+- **Username:** `gazlowe`
+- **Full Name:** Gazlowe
 - **Password:** `password`
 - **Email:** sales1@goldshire.local
 - **Groups:** Sales Department, Domain Users
@@ -101,9 +101,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
   - Brute force target
   - Credential stuffing
 
-#### sales2 - Sales Representative
-- **Username:** `sales2`
-- **Full Name:** Sales Representative 2
+#### tradewind - Sales Representative (Tradewind - Goblin Trader)
+- **Username:** `tradewind`
+- **Full Name:** Tradewind
 - **Password:** `12345678`
 - **Email:** sales2@goldshire.local
 - **Groups:** Sales Department, Domain Users
@@ -123,9 +123,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 
 **Purpose:** Sensitive data access scenarios, insider threats, and data exfiltration.
 
-#### hrdirector - HR Director
-- **Username:** `hrdirector`
-- **Full Name:** HR Director
+#### jaina - HR Director (Jaina Proudmoore - Lord Admiral)
+- **Username:** `jaina`
+- **Full Name:** Jaina Proudmoore
 - **Password:** `HRDirector1!`
 - **Email:** hrdirector@goldshire.local
 - **Groups:** HR Department, Managers, HR Admins, Domain Users
@@ -139,9 +139,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
   - Sensitive data access
   - PII/PHI access abuse
 
-#### hr1 - HR Assistant
-- **Username:** `hr1`
-- **Full Name:** HR Assistant
+#### turalyon - HR Assistant (Turalyon - Alliance Commander)
+- **Username:** `turalyon`
+- **Full Name:** Turalyon
 - **Password:** `hr2024`
 - **Email:** hr1@goldshire.local
 - **Groups:** HR Department, Domain Users
@@ -160,9 +160,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 
 **Purpose:** High-value targets for APT simulation, spear phishing, and executive-level attacks.
 
-#### ceo - Chief Executive Officer
-- **Username:** `ceo`
-- **Full Name:** Chief Executive Officer
+#### anduin - Chief Executive Officer (Anduin Wrynn - King of Stormwind)
+- **Username:** `anduin`
+- **Full Name:** Anduin Wrynn
 - **Password:** `CEO2024!`
 - **Email:** ceo@goldshire.local
 - **Groups:** Domain Users, Executives, Managers
@@ -176,9 +176,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
   - Executive-level compromise
   - Business email compromise (BEC)
 
-#### cfo - Chief Financial Officer
-- **Username:** `cfo`
-- **Full Name:** Chief Financial Officer
+#### genn - Chief Financial Officer (Genn Greymane - King of Gilneas)
+- **Username:** `genn`
+- **Full Name:** Genn Greymane
 - **Password:** `Finance2024!`
 - **Email:** cfo@goldshire.local
 - **Groups:** Domain Users, Executives, Finance, Managers
@@ -198,9 +198,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 
 **Purpose:** Service account abuse, persistence, and credential dumping scenarios.
 
-#### svc_web - Web Service Account
-- **Username:** `svc_web`
-- **Full Name:** Web Service Account
+#### svc_azeroth - Web Service Account (Azeroth - World name)
+- **Username:** `svc_azeroth`
+- **Full Name:** Azeroth Service Account
 - **Password:** `ServiceAccount1!`
 - **Email:** svc_web@goldshire.local
 - **Groups:** IIS_IUSRS, Domain Users
@@ -215,9 +215,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
   - Application-level access
   - Credential dumping
 
-#### svc_backup - Backup Service Account
-- **Username:** `svc_backup`
-- **Full Name:** Backup Service Account
+#### svc_dalaran - Backup Service Account (Dalaran - Floating city)
+- **Username:** `svc_dalaran`
+- **Full Name:** Dalaran Service Account
 - **Password:** `Backup123!`
 - **Email:** svc_backup@goldshire.local
 - **Groups:** Backup Operators, Domain Users
@@ -238,9 +238,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 
 **Purpose:** Blue team monitoring scenarios and security account compromise.
 
-#### securityanalyst - Security Analyst
-- **Username:** `securityanalyst`
-- **Full Name:** Security Analyst
+#### maiev - Security Analyst (Maiev Shadowsong - Warden)
+- **Username:** `maiev`
+- **Full Name:** Maiev Shadowsong
 - **Password:** `Security2024!`
 - **Email:** securityanalyst@goldshire.local
 - **Groups:** Security Team, Event Log Readers, Domain Users
@@ -260,9 +260,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 
 **Purpose:** Pre-compromised accounts for attack chain simulation and account enumeration.
 
-#### compromised_user - Compromised Account
-- **Username:** `compromised_user`
-- **Full Name:** Compromised User
+#### arthas - Compromised Account (Arthas Menethil - Fallen Prince)
+- **Username:** `arthas`
+- **Full Name:** Arthas Menethil
 - **Password:** `P@ssw0rd`
 - **Email:** compromised_user@goldshire.local
 - **Groups:** Domain Users
@@ -276,9 +276,9 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
   - Attack chain simulation
   - Credential reuse
 
-#### disabled_user - Disabled Account
-- **Username:** `disabled_user`
-- **Full Name:** Disabled User
+#### varian - Disabled Account (Varian Wrynn - Former King, deceased)
+- **Username:** `varian`
+- **Full Name:** Varian Wrynn
 - **Password:** `OldPassword123!`
 - **Email:** disabled_user@goldshire.local
 - **Groups:** Domain Users
@@ -330,65 +330,65 @@ The following security groups should be created:
 
 ## Quick Reference - All Passwords
 
-| Username | Password | Department |
-|----------|----------|------------|
-| itadmin | Password123! | IT |
-| itsupport | Welcome2024! | IT |
-| networkadmin | NetAdmin123 | IT |
-| salesmanager | Sales2024! | Sales |
-| sales1 | password | Sales |
-| sales2 | 12345678 | Sales |
-| hrdirector | HRDirector1! | HR |
-| hr1 | hr2024 | HR |
-| ceo | CEO2024! | Management |
-| cfo | Finance2024! | Management |
-| svc_web | ServiceAccount1! | Service Accounts |
-| svc_backup | Backup123! | Service Accounts |
-| securityanalyst | Security2024! | Security |
-| compromised_user | P@ssw0rd | Test |
-| disabled_user | OldPassword123! | Test (Disabled) |
+| Username | Password | Department | WoW Character/Location |
+|----------|----------|------------|----------------------|
+| gelbin | Password123! | IT | Gelbin Mekkatorque (Gnomeregan) |
+| tinkmaster | Welcome2024! | IT | Tinkmaster Overspark (Gnomeregan) |
+| khazmodan | NetAdmin123 | IT | Khaz Modan (Dwarf region) |
+| gallywix | Sales2024! | Sales | Trade Prince Gallywix (Goblin) |
+| gazlowe | password | Sales | Gazlowe (Goblin Engineer) |
+| tradewind | 12345678 | Sales | Tradewind (Goblin Trader) |
+| jaina | HRDirector1! | HR | Jaina Proudmoore (Lord Admiral) |
+| turalyon | hr2024 | HR | Turalyon (Alliance Commander) |
+| anduin | CEO2024! | Management | Anduin Wrynn (King of Stormwind) |
+| genn | Finance2024! | Management | Genn Greymane (King of Gilneas) |
+| svc_azeroth | ServiceAccount1! | Service Accounts | Azeroth (World name) |
+| svc_dalaran | Backup123! | Service Accounts | Dalaran (Floating city) |
+| maiev | Security2024! | Security | Maiev Shadowsong (Warden) |
+| arthas | P@ssw0rd | Test | Arthas Menethil (Fallen Prince) |
+| varian | OldPassword123! | Test (Disabled) | Varian Wrynn (Former King) |
 
 ## Cybersecurity Scenarios Enabled
 
 ### 1. Weak Password Exploitation
 - Multiple users with weak passwords
 - Various password patterns (dates, simple words, common passwords)
-- Targets: sales1, sales2, hr1, compromised_user
+- Targets: gazlowe, tradewind, turalyon, arthas
 
 ### 2. Privilege Escalation
 - Regular users → IT Admin
 - Service account → Domain Admin
-- Targets: itsupport → itadmin, svc_backup → Domain Admins
+- Targets: tinkmaster → gelbin, svc_dalaran → Domain Admins
 
 ### 3. Lateral Movement
 - Compromised user → Other department members
 - Service account abuse
-- Targets: compromised_user, sales1, itsupport
+- Targets: arthas, gazlowe, tinkmaster
 
 ### 4. Phishing Simulation
 - Sales and management users as targets
 - Credential harvesting scenarios
-- Targets: salesmanager, ceo, cfo
+- Targets: gallywix, anduin, genn
 
 ### 5. Insider Threat
 - HR user accessing sensitive data
 - IT support with elevated access
-- Targets: hrdirector, hr1, itsupport
+- Targets: jaina, turalyon, tinkmaster
 
 ### 6. Account Enumeration
 - Disabled accounts
 - Service accounts discovery
-- Targets: disabled_user, svc_web, svc_backup
+- Targets: varian, svc_azeroth, svc_dalaran
 
 ### 7. High-Value Target Compromise
 - Executive-level accounts
 - Financial data access
-- Targets: ceo, cfo
+- Targets: anduin, genn
 
 ### 8. Service Account Abuse
 - Service account compromise
 - Persistence mechanisms
-- Targets: svc_web, svc_backup
+- Targets: svc_azeroth, svc_dalaran
 
 ## Usage in Lab Exercises
 

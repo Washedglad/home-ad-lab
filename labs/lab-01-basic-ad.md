@@ -105,11 +105,11 @@ goldshire.local
 
 1. Log in to CLIENT01
 2. Log out current user
-3. Log in as `GOLDSHIRE\sales1`
+3. Log in as `GOLDSHIRE\gazlowe`
 4. Verify authentication succeeds
 5. Verify user profile is created
 6. Log out
-7. Repeat with `GOLDSHIRE\itadmin`
+7. Repeat with `GOLDSHIRE\gelbin`
 
 **Expected Result:** Users can successfully authenticate.
 

