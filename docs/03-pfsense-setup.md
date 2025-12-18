@@ -367,12 +367,17 @@ If you need to access services from host:
 
 ### DNS Forwarder
 
-1. Go to **Services > DNS Resolver**
+1. Go to **Services > DNS Resolver > General Settings**
 2. Enable: ✅ **Enable DNS Resolver**
 3. Configure:
-   - **Network Interfaces:** LAN, OPT1
+   - **Network Interfaces:** **All** (must include localhost - see important note below)
    - **Outgoing Network Interfaces:** WAN
 4. Save
+
+**Important:** If you see an error "This system is configured to use the DNS Resolver as its DNS server, so Localhost or All must be selected in Network Interfaces":
+- Select **"All"** in Network Interfaces (not just LAN and OPT1)
+- This is required because pfSense itself needs to use the DNS Resolver
+- "All" includes LAN, OPT1, and localhost, allowing pfSense to query itself
 
 ### DNS Forwarder Settings
 
