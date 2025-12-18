@@ -39,7 +39,7 @@ Before proceeding, document your network plan:
 - [ ] Gateway IP: 192.168.100.1
 - [ ] DNS server IP: 192.168.100.10
 - [ ] Domain name: corp.local
-- [ ] All static IPs documented
+- [ ] All static IPs planned (will be assigned during VM configuration)
 
 ## DNS Configuration
 
@@ -187,7 +187,7 @@ Use this template to document your network:
 Now that network planning is complete:
 
 1. ✅ Network topology understood
-2. ✅ IP addresses assigned
+2. ✅ IP addressing scheme documented (IPs will be assigned during VM setup)
 3. ✅ DNS structure planned
 4. ✅ Firewall rules planned
 
