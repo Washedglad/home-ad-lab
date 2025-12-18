@@ -243,9 +243,11 @@ This guide covers the installation and configuration of Active Directory Domain 
    - **CLIENT01:** 192.168.100.50 (MAC address from VM)
    - **WEB01:** 192.168.101.10 (MAC address from VM)
 
-## Step 7: Create Organizational Units
+## Step 7: Create Basic Organizational Units
 
 ### Create OU Structure
+
+**Note:** For comprehensive lab user accounts, see Step 8 below. This step creates basic OUs.
 
 1. Open **Active Directory Users and Computers**
 2. Right-click **goldshire.local > New > Organizational Unit**
@@ -413,6 +415,38 @@ Get-ADDomainController
 - Check domain controller is accessible
 - Verify credentials are correct
 
+## Step 8: Create Lab User Accounts (Optional but Recommended)
+
+For cybersecurity training scenarios, create user accounts with intentionally weak passwords. This enables attack simulation exercises.
+
+### Option 1: Automated Creation (Recommended)
+
+1. On DC01, open **PowerShell as Administrator**
+2. Navigate to scripts directory (or copy script to DC01)
+3. Run the user creation script:
+   ```powershell
+   .\scripts\windows\create-lab-users.ps1
+   ```
+4. Script will create:
+   - All Organizational Units (OUs)
+   - All Security Groups
+   - All User Accounts (15 users)
+   - Group memberships
+
+### Option 2: Manual Creation
+
+1. Open **Active Directory Users and Computers**
+2. Create OUs for each department (see [LAB_USER_ACCOUNTS.md](./LAB_USER_ACCOUNTS.md))
+3. Create security groups
+4. Create user accounts manually using the user list in [LAB_USER_ACCOUNTS.md](./LAB_USER_ACCOUNTS.md)
+
+### User Account Documentation
+
+Complete user account information, including passwords and cybersecurity scenarios, is documented in:
+- **[LAB_USER_ACCOUNTS.md](./LAB_USER_ACCOUNTS.md)** - Complete user account reference
+
+**Note:** All passwords are intentionally weak for educational purposes. Since this is an isolated lab, passwords are documented.
+
 ## Next Steps
 
 Now that Domain Controller is configured:
@@ -422,6 +456,7 @@ Now that Domain Controller is configured:
 3. ✅ DNS configured
 4. ✅ DHCP configured
 5. ✅ Basic OUs, users, and groups created
+6. ✅ Lab user accounts created (optional)
 
 **Next Guide:** [05-wazuh-setup.md](./05-wazuh-setup.md) - Install and configure Wazuh SIEM.
 
