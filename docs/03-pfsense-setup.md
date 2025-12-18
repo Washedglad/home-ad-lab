@@ -96,11 +96,21 @@ The newer pfSense installer uses a graphical interface. Follow these steps:
 
 1. Select **"000-2_8_1 Current Stable Version (2.8.1)"** (or latest available)
 2. Click **OK**
-3. Wait for installation to complete
+3. Wait for installation to complete (may take 10-15 minutes)
+4. **Important:** Do not interrupt the installation process
+5. Installation will automatically reboot when complete
+
+### Post-Installation Reboot
+
+After installation completes:
+1. System will automatically reboot
+2. Remove or unmount the ISO in VMware (to prevent booting from ISO again)
+3. System should boot from the installed ZFS filesystem
+4. If you see `mountroot>` prompt, see troubleshooting section below
 
 ### Initial Interface Configuration (GUI Installer)
 
-After installation, the installer will configure network interfaces:
+After reboot, the installer will continue and configure network interfaces:
 
 #### Interface Assignment
 
@@ -145,6 +155,13 @@ After installation, the installer will configure network interfaces:
 4. Select **Continue** and click **OK**
 
 **Note:** If you encounter issues with OPT1 configuration, you can skip it and configure via web interface later.
+
+### After Interface Configuration
+
+1. Installer will complete setup
+2. System will be ready to use
+3. Note the LAN IP address (should be 192.168.100.1)
+4. You can now access the web interface (see Step 3 below)
 
 ### Alternative: Text-Based Installer
 
@@ -484,6 +501,41 @@ If not using AD DHCP, configure pfSense DHCP:
   - em0 → WAN
   - em1 → LAN
   - em2 → OPT1
+
+### Installation Fails or mountroot> Prompt Appears
+
+**Problem:** Installation fails with "Child process terminated abnormally: Killed" or system shows `mountroot>` prompt after reboot
+
+**Causes:**
+- Out of memory (OOM killer) - most common
+- Installation didn't complete successfully
+- ZFS filesystem wasn't created properly
+
+**Solutions:**
+
+1. **Check VM Resources:**
+   - Ensure VM has at least 1GB RAM (2GB recommended)
+   - Verify disk has at least 8GB free space
+   - Check CPU allocation
+
+2. **If mountroot> Prompt Appears:**
+   - This means installation failed and system can't find root filesystem
+   - Press Enter at prompt to abort
+   - Reboot and reinstall from ISO
+
+3. **Reinstall Steps:**
+   - Shut down VM completely
+   - Delete the VM's virtual disk (`.vmdk` file) in VMware
+   - Create new VM with fresh disk
+   - Increase RAM to 2GB if it was less
+   - Boot from ISO and start installation over
+   - Ensure installation completes fully before rebooting
+
+4. **Prevent Future Issues:**
+   - Allocate sufficient RAM (2GB recommended)
+   - Don't interrupt installation process
+   - Wait for "Installation complete" message before rebooting
+   - Ensure ISO is unmounted after installation to boot from disk
 
 ## Next Steps
 
