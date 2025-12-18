@@ -1,0 +1,71 @@
+# Credentials and sensitive information
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.txt
+passwords.txt
+secrets.txt
+*.env
+.env
+
+# Windows
+Thumbs.db
+Desktop.ini
+*.lnk
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Backup files
+*.bak
+*.backup
+*.old
+*_backup.*
+
+# VMware
+*.vmx.lck
+*.vmdk
+*.vmem
+*.vmsn
+*.vmss
+*.nvram
+
+# Configuration backups
+configs/*.backup
+configs/*.old
+
+# Personal notes
+notes.txt
+personal-notes.md
+TODO.txt
+
+# Large files
+*.iso
+*.vmdk
+*.vhd
+*.vhdx
+
