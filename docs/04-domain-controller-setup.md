@@ -266,23 +266,39 @@ This guide covers the installation and configuration of Active Directory Domain 
 1. Right-click **Computers** container > **Move**
 2. Move to **Computers > Servers** or **Workstations**
 
-## Step 8: Create Users and Groups
+## Step 8: Create Lab User Accounts (Comprehensive)
 
-### Create User Accounts
+**Note:** This section provides comprehensive user account creation for cybersecurity lab scenarios. For basic setup, you can skip this step. For full lab functionality with attack simulation capabilities, follow the instructions below.
 
-1. In **AD Users and Computers**, navigate to **Users** OU
-2. Right-click **Users > New > User**
-3. Create sample users:
-   - **IT Users:**
-     - `itadmin` - IT Administrator
-     - `itsupport` - IT Support
-   - **Sales Users:**
-     - `sales1` - Sales Representative
-     - `sales2` - Sales Representative
-   - **Management:**
-     - `manager1` - Manager
+### Option 1: Automated Creation (Recommended)
 
-### Create Security Groups
+1. On DC01, open **PowerShell as Administrator**
+2. Navigate to scripts directory (or copy script to DC01)
+3. Run the user creation script:
+   ```powershell
+   .\scripts\windows\create-lab-users.ps1
+   ```
+4. Script will create:
+   - All Organizational Units (OUs)
+   - All Security Groups
+   - All User Accounts (15 users)
+   - Group memberships
+
+### Option 2: Manual Creation
+
+1. Open **Active Directory Users and Computers**
+2. Create OUs for each department (see [LAB_USER_ACCOUNTS.md](./LAB_USER_ACCOUNTS.md))
+3. Create security groups
+4. Create user accounts manually using the user list in [LAB_USER_ACCOUNTS.md](./LAB_USER_ACCOUNTS.md)
+
+### User Account Documentation
+
+Complete user account information, including passwords and cybersecurity scenarios, is documented in:
+- **[LAB_USER_ACCOUNTS.md](./LAB_USER_ACCOUNTS.md)** - Complete user account reference
+
+**Note:** All passwords are intentionally weak for educational purposes. Since this is an isolated lab, passwords are documented.
+
+## Step 9: Basic User and Group Creation (Optional - Simple Setup)
 
 1. Right-click **Groups > New > Group**
 2. Create groups:
