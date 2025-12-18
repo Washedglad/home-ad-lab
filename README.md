@@ -39,6 +39,7 @@ The lab consists of the following components:
 - [NETWORK_DIAGRAM.md](./NETWORK_DIAGRAM.md) - Network topology and IP addressing
 - [REQUIREMENTS.md](./REQUIREMENTS.md) - Hardware and software requirements
 - [SETUP_GUIDE.md](./SETUP_GUIDE.md) - Master setup guide with component links
+- [COMPANY_INFO.md](./docs/COMPANY_INFO.md) - Goldshire Consulting company information
 
 ### Setup Guides (docs/)
 1. [VMware Workstation Setup](./docs/01-vmware-setup.md)
