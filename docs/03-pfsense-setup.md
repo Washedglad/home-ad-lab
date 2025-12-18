@@ -377,12 +377,15 @@ If you need to access services from host:
 ### DNS Forwarder Settings
 
 1. Go to **Services > DNS Resolver > General Settings**
-2. Add forwarders (optional):
-   - 8.8.8.8 (Google)
-   - 1.1.1.1 (Cloudflare)
-3. Save
+2. Scroll down to **"DNS Query Forwarding"** section
+3. Add forwarders (optional, but recommended):
+   - Click **Add** button
+   - Enter: `8.8.8.8` (Google)
+   - Click **Add** again
+   - Enter: `1.1.1.1` (Cloudflare)
+4. Save
 
-**Note:** Primary DNS will be the Domain Controller (192.168.100.10) once configured.
+**Note:** Primary DNS will be the Domain Controller (192.168.100.10) once configured. The forwarders are used for external DNS queries.
 
 ## Step 7: Configure DHCP Relay (Optional)
 
