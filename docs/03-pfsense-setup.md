@@ -268,11 +268,16 @@ After reboot, text-based setup wizard:
    - **Action:** Pass
    - **Interface:** LAN
    - **Protocol:** Any
-   - **Source:** LAN net
+   - **Source:** LAN net (see note about source addresses below)
    - **Destination:** Any
    - **Description:** Allow Internal to Internet
 3. Save
 4. Apply changes
+
+**Note on Source Addresses:**
+- Always use **"LAN net"** or **"LAN subnets"** (not "LAN address")
+- "LAN net" allows all devices on the network
+- "LAN address" only allows the router itself
 
 ### DMZ Network Rules
 
@@ -293,20 +298,34 @@ After reboot, text-based setup wizard:
    - **Action:** Pass
    - **Interface:** LAN
    - **Protocol:** TCP
-   - **Source:** LAN net
+   - **Source:** LAN net (see important note below)
    - **Destination:** OPT1 net
    - **Destination Port:** HTTP (80), HTTPS (443)
    - **Description:** Allow Internal to DMZ Web
 3. Save
 4. Apply changes
 
+**Important - Source Address Selection:**
+- **LAN net** = Entire LAN network (192.168.100.0/24) - Use this for allowing all devices
+- **LAN address** = Only the pfSense router's IP (192.168.100.1) - Don't use this
+- In the dropdown, select "LAN net" or "LAN subnets"
+- If not available, select "Network" and enter `192.168.100.0/24`
+
 ### Block DMZ to Internal (Default)
 
-DMZ to Internal is blocked by default. Verify:
+DMZ to Internal is blocked by default. This means there's no rule allowing it, so it's automatically blocked.
 
+**Important:** You won't see an explicit "Block" rule - that's normal! Firewalls block by default unless there's an explicit "Pass" rule.
+
+**Verify blocking:**
 1. Go to **Firewall > Rules > OPT1**
-2. Default rule should be **Block**
-3. Add exception for DNS if needed:
+2. You should see "Allow DMZ to Internet" rule (this is correct)
+3. There should be NO rule allowing DMZ to Internal - this means it's blocked ✓
+
+**Add exception for DNS (optional, only if needed):**
+If the web server needs to query DNS on the Domain Controller:
+1. Click **Add** button in OPT1 rules
+2. Create rule:
    - **Action:** Pass
    - **Interface:** OPT1
    - **Protocol:** UDP
@@ -314,8 +333,10 @@ DMZ to Internal is blocked by default. Verify:
    - **Destination:** 192.168.100.10 (DC)
    - **Destination Port:** DNS (53)
    - **Description:** Allow DMZ DNS to DC
-4. Save
-5. Apply changes
+3. Save
+4. Apply changes
+
+**Note:** This DNS exception is optional and can be added later if the web server needs DNS resolution.
 
 ## Step 5: Configure NAT
 
