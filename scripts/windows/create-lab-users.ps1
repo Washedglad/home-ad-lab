@@ -227,11 +227,11 @@ New-UserIfNotExists -SamAccountName "gallywix" -Name "Trade Prince Gallywix" -Gi
     -Groups @("Sales Department", "Managers") -Email "gallywix@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "gazlowe" -Name "Gazlowe" -GivenName "Gazlowe" -Surname "" -DisplayName "Gazlowe" `
-    -Password "password" -Path "OU=Sales Department,$UsersOUPath" -Description "Sales Representative (Goblin Engineer)" `
+    -Password "Password1!" -Path "OU=Sales Department,$UsersOUPath" -Description "Sales Representative (Goblin Engineer)" `
     -Groups @("Sales Department") -Email "gazlowe@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "tradewind" -Name "Tradewind" -GivenName "Tradewind" -Surname "" -DisplayName "Tradewind" `
-    -Password "12345678" -Path "OU=Sales Department,$UsersOUPath" -Description "Sales Representative (Goblin Trader)" `
+    -Password "Password123!" -Path "OU=Sales Department,$UsersOUPath" -Description "Sales Representative (Goblin Trader)" `
     -Groups @("Sales Department") -Email "tradewind@goldshire.local"
 
 # HR Department Users
@@ -240,7 +240,7 @@ New-UserIfNotExists -SamAccountName "jaina" -Name "Jaina Proudmoore" -GivenName 
     -Groups @("HR Department", "Managers", "HR Admins") -Email "jaina@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "turalyon" -Name "Turalyon" -GivenName "Turalyon" -Surname "" -DisplayName "Turalyon" `
-    -Password "hr2024" -Path "OU=HR Department,$UsersOUPath" -Description "HR Assistant (Alliance Commander)" `
+    -Password "Hr2024!" -Path "OU=HR Department,$UsersOUPath" -Description "HR Assistant (Alliance Commander)" `
     -Groups @("HR Department") -Email "turalyon@goldshire.local"
 
 # Management Users
@@ -255,9 +255,10 @@ New-UserIfNotExists -SamAccountName "genn" -Name "Genn Greymane" -GivenName "Gen
 # Service Accounts
 # Note: IIS_IUSRS is a local machine group, not a domain group, so it's removed
 # Add manually to local machine after IIS installation if needed
+# Note: CannotChangePassword set to false to avoid password policy conflicts during creation
 New-UserIfNotExists -SamAccountName "svc_azeroth" -Name "Azeroth Service Account" -GivenName "Azeroth" -Surname "Service" -DisplayName "Azeroth Service Account" `
     -Password "ServiceAccount1!" -Path "OU=Service Accounts,$UsersOUPath" -Description "Service account for web applications (Azeroth)" `
-    -Groups @() -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_azeroth@goldshire.local"
+    -Groups @() -PasswordNeverExpires $true -CannotChangePassword $false -Email "svc_azeroth@goldshire.local"
 
 # Note: Backup Operators is a built-in group that requires DistinguishedName reference
 # For simplicity, removed from script - add manually if needed: CN=Backup Operators,CN=Builtin,$DomainDN

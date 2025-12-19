@@ -88,7 +88,7 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 #### gazlowe - Sales Representative (Gazlowe - Goblin Engineer)
 - **Username:** `gazlowe`
 - **Full Name:** Gazlowe
-- **Password:** `password`
+- **Password:** `Password1!`
 - **Email:** sales1@goldshire.local
 - **Groups:** Sales Department, Domain Users
 - **OU:** Sales Department
@@ -104,7 +104,7 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 #### tradewind - Sales Representative (Tradewind - Goblin Trader)
 - **Username:** `tradewind`
 - **Full Name:** Tradewind
-- **Password:** `12345678`
+- **Password:** `Password123!`
 - **Email:** sales2@goldshire.local
 - **Groups:** Sales Department, Domain Users
 - **OU:** Sales Department
@@ -336,10 +336,10 @@ The following security groups should be created:
 | tinkmaster | Welcome2024! | IT | Tinkmaster Overspark (Gnomeregan) |
 | khazmodan | NetAdmin123 | IT | Khaz Modan (Dwarf region) |
 | gallywix | Sales2024! | Sales | Trade Prince Gallywix (Goblin) |
-| gazlowe | password | Sales | Gazlowe (Goblin Engineer) |
-| tradewind | 12345678 | Sales | Tradewind (Goblin Trader) |
+| gazlowe | Password1! | Sales | Gazlowe (Goblin Engineer) |
+| tradewind | Password123! | Sales | Tradewind (Goblin Trader) |
 | jaina | HRDirector1! | HR | Jaina Proudmoore (Lord Admiral) |
-| turalyon | hr2024 | HR | Turalyon (Alliance Commander) |
+| turalyon | Hr2024! | HR | Turalyon (Alliance Commander) |
 | anduin | CEO2024! | Management | Anduin Wrynn (King of Stormwind) |
 | genn | Finance2024! | Management | Genn Greymane (King of Gilneas) |
 | svc_azeroth | ServiceAccount1! | Service Accounts | Azeroth (World name) |
