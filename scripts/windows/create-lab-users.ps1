@@ -28,11 +28,34 @@ function New-OUIfNotExists {
         [string]$Description
     )
     
-    if (-not (Get-ADOrganizationalUnit -Filter "Name -eq '$Name'" -SearchBase $Path -ErrorAction SilentlyContinue)) {
-        New-ADOrganizationalUnit -Name $Name -Path $Path -Description $Description -ProtectedFromAccidentalDeletion $false
+    try {
+        # Verify parent path exists
+        try {
+            $null = Get-ADObject -Identity $Path -ErrorAction Stop
+        } catch {
+            Write-Host "Parent path does not exist: $Path" -ForegroundColor Red
+            return $null
+        }
+        
+        # Check if OU already exists
+        $existing = Get-ADOrganizationalUnit -Filter "Name -eq '$Name'" -SearchBase $Path -ErrorAction SilentlyContinue
+        if ($existing) {
+            Write-Host "OU already exists: $Name" -ForegroundColor Yellow
+            return $existing
+        }
+        
+        # Create the OU
+        New-ADOrganizationalUnit -Name $Name -Path $Path -Description $Description -ProtectedFromAccidentalDeletion $false -ErrorAction Stop
         Write-Host "Created OU: $Name" -ForegroundColor Green
-    } else {
-        Write-Host "OU already exists: $Name" -ForegroundColor Yellow
+        return (Get-ADOrganizationalUnit -Filter "Name -eq '$Name'" -SearchBase $Path)
+    } catch {
+        if ($_.Exception.Message -like "*already in use*" -or $_.Exception.Message -like "*already exists*") {
+            Write-Host "OU already exists: $Name" -ForegroundColor Yellow
+            return (Get-ADOrganizationalUnit -Filter "Name -eq '$Name'" -SearchBase $Path -ErrorAction SilentlyContinue)
+        } else {
+            Write-Host "Error creating OU $Name : $($_.Exception.Message)" -ForegroundColor Red
+            return $null
+        }
     }
 }
 
@@ -115,20 +138,53 @@ function New-UserIfNotExists {
 Write-Host "Creating Organizational Units..." -ForegroundColor Cyan
 Write-Host ""
 
-# Create OU structure
-$UsersOU = "OU=Users,$DomainDN"
-$ComputersOU = "OU=Computers,$DomainDN"
+# Create Lab parent OU first (avoids conflicts with built-in containers)
+Write-Host "Creating Lab parent OU..." -ForegroundColor Cyan
+$LabOU = New-OUIfNotExists -Name "Lab" -Path $DomainDN -Description "Lab organizational structure"
+if (-not $LabOU) {
+    $LabOU = Get-ADOrganizationalUnit -Filter "Name -eq 'Lab'" -SearchBase $DomainDN -ErrorAction SilentlyContinue
+}
 
-New-OUIfNotExists -Name "Users" -Path $DomainDN -Description "User accounts"
-New-OUIfNotExists -Name "Computers" -Path $DomainDN -Description "Computer accounts"
+if (-not $LabOU) {
+    Write-Host "ERROR: Could not create or find Lab OU! Exiting." -ForegroundColor Red
+    exit 1
+}
 
-# Department OUs
-New-OUIfNotExists -Name "IT Department" -Path $UsersOU -Description "IT Department users"
-New-OUIfNotExists -Name "Sales Department" -Path $UsersOU -Description "Sales Department users"
-New-OUIfNotExists -Name "HR Department" -Path $UsersOU -Description "HR Department users"
-New-OUIfNotExists -Name "Management" -Path $UsersOU -Description "Management users"
-New-OUIfNotExists -Name "Service Accounts" -Path $UsersOU -Description "Service accounts"
-New-OUIfNotExists -Name "Security Team" -Path $UsersOU -Description "Security team users"
+$LabOUPath = $LabOU.DistinguishedName
+Write-Host "Lab OU Path: $LabOUPath" -ForegroundColor Green
+Write-Host ""
+
+# Create OU structure under Lab OU
+$UsersOUPath = "OU=Users,$LabOUPath"
+$ComputersOUPath = "OU=Computers,$LabOUPath"
+
+$UsersOU = New-OUIfNotExists -Name "Users" -Path $LabOUPath -Description "User accounts"
+$ComputersOU = New-OUIfNotExists -Name "Computers" -Path $LabOUPath -Description "Computer accounts"
+
+# Get actual DistinguishedNames for child OU creation
+if (-not $UsersOU) {
+    $UsersOU = Get-ADOrganizationalUnit -Filter "Name -eq 'Users'" -SearchBase $LabOUPath -ErrorAction SilentlyContinue
+}
+if (-not $ComputersOU) {
+    $ComputersOU = Get-ADOrganizationalUnit -Filter "Name -eq 'Computers'" -SearchBase $LabOUPath -ErrorAction SilentlyContinue
+}
+
+if (-not $UsersOU -or -not $ComputersOU) {
+    Write-Host "ERROR: Could not create Users or Computers OUs! Exiting." -ForegroundColor Red
+    exit 1
+}
+
+$UsersOUPath = $UsersOU.DistinguishedName
+$ComputersOUPath = $ComputersOU.DistinguishedName
+
+# Department OUs under Users
+New-OUIfNotExists -Name "IT Department" -Path $UsersOUPath -Description "IT Department users"
+New-OUIfNotExists -Name "Sales Department" -Path $UsersOUPath -Description "Sales Department users"
+New-OUIfNotExists -Name "HR Department" -Path $UsersOUPath -Description "HR Department users"
+New-OUIfNotExists -Name "Management" -Path $UsersOUPath -Description "Management users"
+New-OUIfNotExists -Name "Service Accounts" -Path $UsersOUPath -Description "Service accounts"
+New-OUIfNotExists -Name "Security Team" -Path $UsersOUPath -Description "Security team users"
+New-OUIfNotExists -Name "Test Accounts" -Path $UsersOUPath -Description "Test accounts"
 
 Write-Host ""
 Write-Host "Creating Security Groups..." -ForegroundColor Cyan
@@ -154,69 +210,75 @@ Write-Host ""
 
 # IT Department Users
 New-UserIfNotExists -SamAccountName "gelbin" -Name "Gelbin Mekkatorque" -GivenName "Gelbin" -Surname "Mekkatorque" -DisplayName "Gelbin Mekkatorque" `
-    -Password "Password123!" -Path "OU=IT Department,$UsersOU" -Description "IT Administrator with domain admin privileges (Gnomeregan)" `
+    -Password "Password123!" -Path "OU=IT Department,$UsersOUPath" -Description "IT Administrator with domain admin privileges (Gnomeregan)" `
     -Groups @("Domain Admins", "IT Department", "Administrators") -Email "gelbin@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "tinkmaster" -Name "Tinkmaster Overspark" -GivenName "Tinkmaster" -Surname "Overspark" -DisplayName "Tinkmaster Overspark" `
-    -Password "Welcome2024!" -Path "OU=IT Department,$UsersOU" -Description "IT Support Technician (Gnomeregan)" `
+    -Password "Welcome2024!" -Path "OU=IT Department,$UsersOUPath" -Description "IT Support Technician (Gnomeregan)" `
     -Groups @("Help Desk", "IT Department") -Email "tinkmaster@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "khazmodan" -Name "Khaz Modan" -GivenName "Khaz" -Surname "Modan" -DisplayName "Khaz Modan" `
-    -Password "NetAdmin123" -Path "OU=IT Department,$UsersOU" -Description "Network Administrator (Dwarf region)" `
+    -Password "NetAdmin123" -Path "OU=IT Department,$UsersOUPath" -Description "Network Administrator (Dwarf region)" `
     -Groups @("Network Operators", "IT Department") -Email "khazmodan@goldshire.local"
 
 # Sales Department Users
 New-UserIfNotExists -SamAccountName "gallywix" -Name "Trade Prince Gallywix" -GivenName "Trade Prince" -Surname "Gallywix" -DisplayName "Trade Prince Gallywix" `
-    -Password "Sales2024!" -Path "OU=Sales Department,$UsersOU" -Description "Sales Department Manager (Goblin)" `
+    -Password "Sales2024!" -Path "OU=Sales Department,$UsersOUPath" -Description "Sales Department Manager (Goblin)" `
     -Groups @("Sales Department", "Managers") -Email "gallywix@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "gazlowe" -Name "Gazlowe" -GivenName "Gazlowe" -Surname "" -DisplayName "Gazlowe" `
-    -Password "password" -Path "OU=Sales Department,$UsersOU" -Description "Sales Representative (Goblin Engineer)" `
+    -Password "password" -Path "OU=Sales Department,$UsersOUPath" -Description "Sales Representative (Goblin Engineer)" `
     -Groups @("Sales Department") -Email "gazlowe@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "tradewind" -Name "Tradewind" -GivenName "Tradewind" -Surname "" -DisplayName "Tradewind" `
-    -Password "12345678" -Path "OU=Sales Department,$UsersOU" -Description "Sales Representative (Goblin Trader)" `
+    -Password "12345678" -Path "OU=Sales Department,$UsersOUPath" -Description "Sales Representative (Goblin Trader)" `
     -Groups @("Sales Department") -Email "tradewind@goldshire.local"
 
 # HR Department Users
 New-UserIfNotExists -SamAccountName "jaina" -Name "Jaina Proudmoore" -GivenName "Jaina" -Surname "Proudmoore" -DisplayName "Jaina Proudmoore" `
-    -Password "HRDirector1!" -Path "OU=HR Department,$UsersOU" -Description "Human Resources Director (Lord Admiral)" `
+    -Password "HRDirector1!" -Path "OU=HR Department,$UsersOUPath" -Description "Human Resources Director (Lord Admiral)" `
     -Groups @("HR Department", "Managers", "HR Admins") -Email "jaina@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "turalyon" -Name "Turalyon" -GivenName "Turalyon" -Surname "" -DisplayName "Turalyon" `
-    -Password "hr2024" -Path "OU=HR Department,$UsersOU" -Description "HR Assistant (Alliance Commander)" `
+    -Password "hr2024" -Path "OU=HR Department,$UsersOUPath" -Description "HR Assistant (Alliance Commander)" `
     -Groups @("HR Department") -Email "turalyon@goldshire.local"
 
 # Management Users
 New-UserIfNotExists -SamAccountName "anduin" -Name "Anduin Wrynn" -GivenName "Anduin" -Surname "Wrynn" -DisplayName "Anduin Wrynn" `
-    -Password "CEO2024!" -Path "OU=Management,$UsersOU" -Description "Chief Executive Officer (King of Stormwind)" `
+    -Password "CEO2024!" -Path "OU=Management,$UsersOUPath" -Description "Chief Executive Officer (King of Stormwind)" `
     -Groups @("Executives", "Managers") -Email "anduin@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "genn" -Name "Genn Greymane" -GivenName "Genn" -Surname "Greymane" -DisplayName "Genn Greymane" `
-    -Password "Finance2024!" -Path "OU=Management,$UsersOU" -Description "Chief Financial Officer (King of Gilneas)" `
+    -Password "Finance2024!" -Path "OU=Management,$UsersOUPath" -Description "Chief Financial Officer (King of Gilneas)" `
     -Groups @("Executives", "Finance", "Managers") -Email "genn@goldshire.local"
 
 # Service Accounts
+# Note: IIS_IUSRS is a local machine group, not a domain group, so it's removed
+# Add manually to local machine after IIS installation if needed
 New-UserIfNotExists -SamAccountName "svc_azeroth" -Name "Azeroth Service Account" -GivenName "Azeroth" -Surname "Service" -DisplayName "Azeroth Service Account" `
-    -Password "ServiceAccount1!" -Path "OU=Service Accounts,$UsersOU" -Description "Service account for web applications (Azeroth)" `
-    -Groups @("IIS_IUSRS") -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_azeroth@goldshire.local"
+    -Password "ServiceAccount1!" -Path "OU=Service Accounts,$UsersOUPath" -Description "Service account for web applications (Azeroth)" `
+    -Groups @() -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_azeroth@goldshire.local"
 
+# Note: Backup Operators is a built-in group that requires DistinguishedName reference
+# For simplicity, removed from script - add manually if needed: CN=Backup Operators,CN=Builtin,$DomainDN
 New-UserIfNotExists -SamAccountName "svc_dalaran" -Name "Dalaran Service Account" -GivenName "Dalaran" -Surname "Service" -DisplayName "Dalaran Service Account" `
-    -Password "Backup123!" -Path "OU=Service Accounts,$UsersOU" -Description "Service account for backup operations (Dalaran)" `
-    -Groups @("Backup Operators") -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_dalaran@goldshire.local"
+    -Password "Backup123!" -Path "OU=Service Accounts,$UsersOUPath" -Description "Service account for backup operations (Dalaran)" `
+    -Groups @() -PasswordNeverExpires $true -CannotChangePassword $true -Email "svc_dalaran@goldshire.local"
 
 # Security Team Users
+# Note: Event Log Readers is a built-in group that requires DistinguishedName reference
+# For simplicity, removed from script - add manually if needed: CN=Event Log Readers,CN=Builtin,$DomainDN
 New-UserIfNotExists -SamAccountName "maiev" -Name "Maiev Shadowsong" -GivenName "Maiev" -Surname "Shadowsong" -DisplayName "Maiev Shadowsong" `
-    -Password "Security2024!" -Path "OU=Security Team,$UsersOU" -Description "Security Analyst (Warden)" `
-    -Groups @("Security Team", "Event Log Readers") -Email "maiev@goldshire.local"
+    -Password "Security2024!" -Path "OU=Security Team,$UsersOUPath" -Description "Security Analyst (Warden)" `
+    -Groups @("Security Team") -Email "maiev@goldshire.local"
 
 # Test/Compromised Accounts
 New-UserIfNotExists -SamAccountName "arthas" -Name "Arthas Menethil" -GivenName "Arthas" -Surname "Menethil" -DisplayName "Arthas Menethil" `
-    -Password "P@ssw0rd" -Path $UsersOU -Description "Pre-compromised account for attack simulation (Fallen Prince)" `
+    -Password "P@ssw0rd" -Path "OU=Test Accounts,$UsersOUPath" -Description "Pre-compromised account for attack simulation (Fallen Prince)" `
     -Groups @() -Email "arthas@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "varian" -Name "Varian Wrynn" -GivenName "Varian" -Surname "Wrynn" -DisplayName "Varian Wrynn" `
-    -Password "OldPassword123!" -Path $UsersOU -Description "Disabled account for enumeration testing (Former King)" `
+    -Password "OldPassword123!" -Path "OU=Test Accounts,$UsersOUPath" -Description "Disabled account for enumeration testing (Former King)" `
     -Groups @() -Enabled $false -Email "varian@goldshire.local"
 
 Write-Host ""
