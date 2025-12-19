@@ -273,10 +273,19 @@ New-UserIfNotExists -SamAccountName "maiev" -Name "Maiev Shadowsong" -GivenName 
     -Password "Security2024!" -Path "OU=Security Team,$UsersOUPath" -Description "Security Analyst (Warden)" `
     -Groups @("Security Team") -Email "maiev@goldshire.local"
 
+# Additional Management Users
+New-UserIfNotExists -SamAccountName "thrall" -Name "Thrall" -GivenName "Thrall" -Surname "" -DisplayName "Thrall" `
+    -Password "Warchief2024!" -Path "OU=Management,$UsersOUPath" -Description "Chief Operating Officer (Former Warchief)" `
+    -Groups @("Executives", "Managers") -Email "thrall@goldshire.local"
+
 # Test/Compromised Accounts
 New-UserIfNotExists -SamAccountName "arthas" -Name "Arthas Menethil" -GivenName "Arthas" -Surname "Menethil" -DisplayName "Arthas Menethil" `
     -Password "P@ssw0rd" -Path "OU=Test Accounts,$UsersOUPath" -Description "Pre-compromised account for attack simulation (Fallen Prince)" `
     -Groups @() -Email "arthas@goldshire.local"
+
+New-UserIfNotExists -SamAccountName "illidan" -Name "Illidan Stormrage" -GivenName "Illidan" -Surname "Stormrage" -DisplayName "Illidan Stormrage" `
+    -Password "Betrayer123!" -Path "OU=Test Accounts,$UsersOUPath" -Description "Compromised account for attack simulation (The Betrayer)" `
+    -Groups @() -Email "illidan@goldshire.local"
 
 New-UserIfNotExists -SamAccountName "varian" -Name "Varian Wrynn" -GivenName "Varian" -Surname "Wrynn" -DisplayName "Varian Wrynn" `
     -Password "OldPassword123!" -Path "OU=Test Accounts,$UsersOUPath" -Description "Disabled account for enumeration testing (Former King)" `

@@ -180,6 +180,11 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 - **Username:** `genn`
 - **Full Name:** Genn Greymane
 - **Password:** `Finance2024!`
+
+#### thrall - Chief Operating Officer (Thrall - Former Warchief)
+- **Username:** `thrall`
+- **Full Name:** Thrall
+- **Password:** `Warchief2024!`
 - **Email:** cfo@goldshire.local
 - **Groups:** Domain Users, Executives, Finance, Managers
 - **OU:** Management
@@ -264,6 +269,11 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 - **Username:** `arthas`
 - **Full Name:** Arthas Menethil
 - **Password:** `P@ssw0rd`
+
+#### illidan - Compromised Account (Illidan Stormrage - The Betrayer)
+- **Username:** `illidan`
+- **Full Name:** Illidan Stormrage
+- **Password:** `Betrayer123!`
 - **Email:** compromised_user@goldshire.local
 - **Groups:** Domain Users
 - **OU:** Users
@@ -342,10 +352,12 @@ The following security groups should be created:
 | turalyon | Hr2024! | HR | Turalyon (Alliance Commander) |
 | anduin | CEO2024! | Management | Anduin Wrynn (King of Stormwind) |
 | genn | Finance2024! | Management | Genn Greymane (King of Gilneas) |
+| thrall | Warchief2024! | Management | Thrall (Former Warchief) |
 | svc_azeroth | ServiceAccount1! | Service Accounts | Azeroth (World name) |
 | svc_dalaran | Backup123! | Service Accounts | Dalaran (Floating city) |
 | maiev | Security2024! | Security | Maiev Shadowsong (Warden) |
 | arthas | P@ssw0rd | Test | Arthas Menethil (Fallen Prince) |
+| illidan | Betrayer123! | Test | Illidan Stormrage (The Betrayer) |
 | varian | OldPassword123! | Test (Disabled) | Varian Wrynn (Former King) |
 
 ## Cybersecurity Scenarios Enabled
@@ -353,7 +365,7 @@ The following security groups should be created:
 ### 1. Weak Password Exploitation
 - Multiple users with weak passwords
 - Various password patterns (dates, simple words, common passwords)
-- Targets: gazlowe, tradewind, turalyon, arthas
+- Targets: gazlowe, tradewind, turalyon, arthas, illidan
 
 ### 2. Privilege Escalation
 - Regular users → IT Admin
@@ -378,12 +390,12 @@ The following security groups should be created:
 ### 6. Account Enumeration
 - Disabled accounts
 - Service accounts discovery
-- Targets: varian, svc_azeroth, svc_dalaran
+- Targets: varian, svc_azeroth, svc_dalaran, illidan
 
 ### 7. High-Value Target Compromise
 - Executive-level accounts
 - Financial data access
-- Targets: anduin, genn
+- Targets: anduin, genn, thrall
 
 ### 8. Service Account Abuse
 - Service account compromise
