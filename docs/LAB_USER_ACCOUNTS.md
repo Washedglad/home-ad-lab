@@ -142,7 +142,7 @@ This document contains all user accounts for the Goldshire Consulting cybersecur
 #### turalyon - HR Assistant (Turalyon - Alliance Commander)
 - **Username:** `turalyon`
 - **Full Name:** Turalyon
-- **Password:** `hr2024`
+- **Password:** `Hr2024!`
 - **Email:** hr1@goldshire.local
 - **Groups:** HR Department, Domain Users
 - **OU:** HR Department
