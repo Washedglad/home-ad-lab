@@ -216,9 +216,20 @@ This guide covers the installation and configuration of Active Directory Domain 
 
 ### Configure DHCP
 
-1. Open **Server Manager > Tools > DHCP**
-2. Right-click **DC01.goldshire.local > Authorize** (if needed)
-3. Expand **DC01 > IPv4**
+**Important:** You must be logged in as **Domain Administrator** (or a user with Enterprise Admin rights) to authorize the DHCP server. The "Authorize" option will not appear if you don't have sufficient privileges.
+
+1. **Ensure you're logged in as Domain Admin:**
+   - Log in as `GOLDSHIRE\Administrator` (built-in Domain Admin)
+   - Or log in as a user in the **Domain Admins** group (e.g., `gelbin`)
+
+2. Open **Server Manager > Tools > DHCP**
+
+3. **Authorize DHCP Server:**
+   - Right-click **DC01.goldshire.local > Authorize** (if needed)
+   - If "Authorize" option doesn't appear, the server may already be authorized (check for green checkmark)
+   - If authorization fails, see troubleshooting section below
+
+4. Expand **DC01 > IPv4**
 4. Right-click **IPv4 > New Scope**
 5. **Scope Wizard:**
    - **Name:** Internal Network
@@ -415,10 +426,20 @@ Get-ADDomainController
 
 **Solutions:**
 - Verify DHCP service is running
-- Authorize DHCP server in AD
+- **Authorize DHCP server in AD:**
+  - **Must be logged in as Domain Administrator** (or Enterprise Admin)
+  - Right-click server in DHCP Manager → **Authorize**
+  - If "Authorize" option doesn't appear, check:
+    - You're logged in as Domain Admin
+    - Server may already be authorized (green checkmark)
+  - Alternative: Use PowerShell as Administrator:
+    ```powershell
+    Add-DhcpServerInDC -DnsName DC01.goldshire.local -IPAddress 192.168.100.10
+    ```
 - Verify scope is activated
 - Check scope options (gateway, DNS)
 - Verify no conflicts with pfSense DHCP
+- Restart DHCP service if needed: `Restart-Service DHCPServer`
 
 ### Cannot Join Domain
 
